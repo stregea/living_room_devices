@@ -25,7 +25,7 @@
 <!-- BrightScript Portion -->
 <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
 <script type="text/brightscript" uri="pkg:/components/lib/logic/ViewStack.brs" />
-<script type="text/brightscript" uri="pkg:/components/lib/logic/GridScreen.brs" />
+<script type="text/brightscript" uri="pkg:/components/lib/logic/GridScreenInitializer.brs" />
 <script type="text/brightscript" uri="pkg:/components/lib/logic/FetchData.brs" />
 <!-- End of BrightScript Portion -->
 </component>

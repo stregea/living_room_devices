@@ -1,5 +1,5 @@
 ' *****************************************************************************************
-' * Filename: GridScreen.brs
+' * Filename: GridScreenInitializer.brs
 ' * Description: This file will handle the logic for initializing the GridScreen component.  
 ' * Author: Samuel Tregea
 ' *****************************************************************************************
