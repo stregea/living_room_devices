@@ -6,10 +6,11 @@
             "name": "BrightScript Debug: Launch",
             "type": "brightscript",
             "request": "launch",
-            "host": "${promptForHost}",
-            "password": "${promptForPassword}",
+            "host": "192.168.50.197",
+            "password": "rokudev",
             "rootDir": "${workspaceFolder}",
-            "consoleOutput": "normal"
+            "consoleOutput": "normal",
+            "stopDebuggerOnAppExit": true
         }
     ]
 }
