@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="MainScene" extends="Scene"> 
+    <children>
+         <!-- Overhang with Roku Developers logo -->
+         <Overhang
+            id="overhang"
+            showOptions="false"
+            showClock="false"
+            logoUri="pkg:/images/hd_overhang_logo.png"
+            translation="[0,60]"
+        />
+        <!-- LoadingIndicator should be visible only in case of waiting for content -->
+        <Label
+            id="loadingIndicator"
+            text="Loading..."
+            width="1280"
+            height="720"
+            translation="[0, 0]"
+            horizAlign="center"
+            vertAlign="center"
+            visible="false"
+            font="font:MediumBoldSystemFont"
+        />
+    </children>
+<!-- BrightScript Portion -->
+<script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+<script type="text/brightscript" uri="pkg:/components/lib/logic/ViewHandle.brs" />
+<script type="text/brightscript" uri="pkg:/components/lib/logic/GridScreen.brs" />
+<script type="text/brightscript" uri="pkg:/components/lib/logic/FetchData.brs" />
+<!-- End of BrightScript Portion -->
+</component>
