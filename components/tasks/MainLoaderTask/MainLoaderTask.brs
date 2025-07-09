@@ -1,5 +1,5 @@
 ' *******************************************************************************************
-' * Filename: MailLoaderTask.brs
+' * Filename: MainLoaderTask.brs
 ' * Description: This file serves as the main task for fetching and parsing the JSON response
 ' *              data to then populate the content within the GridScreen.  
 ' * Author: Samuel Tregea
@@ -47,7 +47,7 @@ sub GetContent()
         rowListNode.Update({
             children: rootChildren
         }, true)
-        
+
         ' populate content field with root content node.
         ' Observer(see OnMainContentLoaded in MainScene.brs) is invoked at that moment
         m.top.content = rowListNode
