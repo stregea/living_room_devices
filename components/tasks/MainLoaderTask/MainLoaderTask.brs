@@ -7,7 +7,8 @@
 
 sub Init()
     ' set the name of the function in the Task node component to be executed when the state field changes to RUN
-    ' in our case this method executed after the following cmd: m.contentTask.control = "run"(see Init method in MainScene)
+    ' in our case this method executed after the following cmd: m.contentTask.control = "run"
+    ' (see Init method in MainScene)
     m.top.functionName = "GetContent"
 end sub
 
@@ -46,6 +47,7 @@ sub GetContent()
         rowListNode.Update({
             children: rootChildren
         }, true)
+        
         ' populate content field with root content node.
         ' Observer(see OnMainContentLoaded in MainScene.brs) is invoked at that moment
         m.top.content = rowListNode
@@ -97,7 +99,7 @@ end function
 function GetImageURL(image as Object, aspectRatio as String) as String
     tile = image.tile[aspectRatio]
     
-    if tile = invalid then return invalid
+    if tile = invalid then return "pkg:/images/splash_hd.jpg"
     
     for each key in tile
         url = tile[key].default.url
@@ -105,7 +107,8 @@ function GetImageURL(image as Object, aspectRatio as String) as String
         if url <> invalid then return url
     end for
 
-    return "pkg:/images/splash_hd.jpg"
+    print "here"
+    return invalid
 end function
 
 

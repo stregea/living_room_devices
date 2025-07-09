@@ -2,18 +2,14 @@
 <component name="RowListItem" extends="Group" xsi:noNamespaceSchemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
     <interface>
         <field id="itemContent" type="node" onChange="OnContentSet" />
-        <field id="focusPercent" type="float" onChange="OnPosterFocus" />
-        <field id="rowFocusPercent" type="float" onChange="OnRowFocus" />
+        <field id="width" type="float" alias="poster.width" />
+        <field id="height" type="float" alias="poster.height" /> 
     </interface>
     <script type="text/brightscript" uri="RowListItem.brs" />
     <children>
         <!-- Poster Image -->
         <Poster
             id="poster"
-            loadWidth = "220" 
-            loadHeight = "144" 
-            loadDisplayMode="scaleToFit"
-        >
-        </Poster>
+        />
     </children>
 </component>

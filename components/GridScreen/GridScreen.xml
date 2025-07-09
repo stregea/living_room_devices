@@ -12,6 +12,7 @@
 			translation="[20,170]"
 	    />
         <!-- ZoomRowList to be used for auto-scaling -->
+        <!-- https://developer.roku.com/docs/references/scenegraph/list-and-grid-nodes/zoomrowlist.md -->
         <ZoomRowList
             id="rowList"
             itemComponentName="RowListItem"

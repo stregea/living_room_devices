@@ -27,4 +27,3 @@ sub OnItemFocusedObserver()
         m.title.text = item.title
     end if
 end sub
-
