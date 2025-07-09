@@ -8,7 +8,7 @@
 sub Init()
   ' set background color for scene. Applied only if backgroundUri has empty value
   m.top.backgroundColor = "0x662D91"
-  m.top.backgroundUri= "pkg:/images/background.jpg"
+  m.top.backgroundUri= "pkg:/images/background.png"
   m.loadingIndicator = m.top.FindNode("loadingIndicator") ' store loadingIndicator node to m
 
   InitView()
