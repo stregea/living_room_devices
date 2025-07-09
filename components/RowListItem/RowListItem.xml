@@ -7,7 +7,7 @@
     </interface>
     <script type="text/brightscript" uri="RowListItem.brs" />
     <children>
-            <!-- Poster Image -->
+        <!-- Poster Image -->
         <Poster
             id="poster"
             loadWidth = "220" 
