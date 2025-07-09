@@ -9,20 +9,14 @@
         <Label
 	        id="title"
 	        width="1020"
-			translation="[130,170]"
+			translation="[20,170]"
 	    />
-        <RowList
-            itemComponentName="RowListItem"
+        <!-- ZoomRowList to be used for auto-scaling -->
+        <ZoomRowList
             id="rowList"
-            translation="[80,230]"
-            numRows="2"
-            rowitemSize="[[320,180]]"
-            rowItemSpacing="[[20,0]]"
-            itemSize="[1100,270]"
-            rowLabelOffset="[[50,20]]"
-            focusXOffset="[50]"
-            showRowLabel="[true]"
-            rowFocusAnimationStyle="floatingfocus"
+            itemComponentName="RowListItem"
+            translation="[20,300]"
+            showRowCounter="[false]"
         />
     </children>
 </component>
