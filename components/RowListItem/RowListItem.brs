@@ -12,6 +12,7 @@ end function
 sub OnPosterFocus()
     ' This increases the size of the tile as it gains more focus
     ' Note: focusPercent is obtained from the ZoomRowList
+    ' todo: find documentation where this was found.
     scale = 1 + (m.top.focusPercent * 0.08)
     m.poster.scale = [scale, scale]
 end sub
