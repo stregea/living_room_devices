@@ -6,15 +6,11 @@
 
 ' Main Method
 sub Main()
-    print "-> Main"
     ShowChannelRSGScreen()
-    print "<- Main"
 end sub
 
 ' Display the Roku SceneGraph
 sub ShowChannelRSGScreen() 
-    print "-> ShowChannelRSGScreen"
-
     'Indicate this is a Roku SceneGraph application'
     screen = CreateObject("roSGScreen")
     m.port = CreateObject("roMessagePort")
@@ -31,6 +27,4 @@ sub ShowChannelRSGScreen()
             if msg.isScreenClosed() then return
         end if
     end while
-    
-    print "<- ShowChannelRSGScreen"
 end sub
