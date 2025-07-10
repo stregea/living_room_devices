@@ -1,0 +1,97 @@
+' **************************************************************************************************************
+' * Filename: JsonHelper.brs
+' * Description: This file holds helper functions that help with parsing JSON data read from the following urls:
+' *              https://cd-static.bamgrid.com/dp-117731241344/home.json
+' *              https://cd-static.bamgrid.com/dp-117731241344/sets/<refId>.json
+' * Author: Samuel Tregea
+' **************************************************************************************************************
+
+' Construct the JSON response from the URL containing the Home Page data.
+function GetJSONResponse(url as String) as Object
+    ' Request the content feed from the API.
+    urlXfer = CreateObject("roURLTransfer")
+    urlXfer.SetCertificatesFile("common:/certs/ca-bundle.crt")
+    urlXfer.SetURL(url)
+
+    return ParseJson(urlXfer.GetToString())
+end function
+
+
+' Retrieve the list of ShelfContainers from the JSON response.
+function GetContainers(json as Object) as Object
+    return json.data.StandardCollection.containers
+end function
+
+
+' Retrieve the title of the ShelfContainer from the JSON response.
+function GetContainerTitle(container as Object) as Object
+    return container.set.text.title.full.set.default.content
+end function
+
+
+' Return the array of Standalone items from a ShelfContainer.
+function GetStandaloneItems(container as Object) as Object
+    return container.set.items
+end function
+
+
+' Read in the image URL from an item within the list of the ShelfContainer's items.
+function GetImageURL(image as Object, aspectRatio as String) as String
+    tile = image.tile[aspectRatio]
+    
+    if tile = invalid then return invalid
+    
+    for each key in tile
+        url = tile[key].default.url
+        if url <> invalid then return url
+    end for
+
+    return invalid
+end function
+
+
+' Read in the video title from an item within the list of the ShelfContainer's items.
+function GetVideoTitle(title as Object) as String
+    fullTitle = title.full
+
+    if fullTitle = invalid then return invalid
+
+    for each key in fullTitle
+        titleText = fullTitle[key].default.content
+        if titleText <> invalid then return titleText
+    end for
+
+    return invalid
+end function
+
+
+' Retrieve a dictionary of Reference ID's and Titles.
+function GetReferenceIds(json as Object) as Object
+    refIds = {}
+
+    for each container in json.data.StandardCollection.containers
+        if container <> invalid and container.set <> invalid and container.set.refId <> invalid
+            ' Store the Reference ID as the key, and the Title as the value.
+            refIds[container.set.refId] = container.set.text.title.full.set.default.content
+        end if
+    end for
+
+    return refIds
+end function
+
+
+' Retrieve a list of curated items based on a Reference ID.
+function GetCuratedItems(refId as Object) as Object
+    items = []
+    json = GetJSONResponse("https://cd-static.bamgrid.com/dp-117731241344/sets/%s.json".Format(refId))
+    
+    if json <> invalid AND json.data <> invalid AND json.data.CuratedSet <> invalid AND json.data.CuratedSet.items <> invalid
+        for each item in json.data.CuratedSet.items
+            if item <> invalid
+                items.Push(item)
+            end if
+        end for
+    end if
+
+    return items
+end function
