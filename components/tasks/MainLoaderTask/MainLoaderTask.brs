@@ -32,12 +32,14 @@ sub GetContent()
             row.children = []
             
             ' Read in and parse the standalone dataset.
-            for each item in items
-                if item <> invalid
-                    data = GetItemData(item)
-                    row.children.push(data)
-                endif
-            end for
+            if items <> invalid
+                for each item in items
+                    if item <> invalid
+                        data = GetItemData(item)
+                        row.children.push(data)
+                    endif
+                end for
+            end if
 
             ' Only add the row if there is data available.
             if NOT row.children.IsEmpty() then rootChildren.push(row)

@@ -4,22 +4,24 @@
 ' * Author: Samuel Tregea
 ' ********************************************************************
 
-' Main Method
+' Main Method.
 sub Main()
     ShowChannelRSGScreen()
 end sub
 
-' Display the Roku SceneGraph
+
+' Display the Roku SceneGraph.
 sub ShowChannelRSGScreen() 
-    'Indicate this is a Roku SceneGraph application'
+    'Indicate this is a Roku SceneGraph application.
     screen = CreateObject("roSGScreen")
     m.port = CreateObject("roMessagePort")
     screen.setMessagePort(m.port)
 
-    'Create a scene and load /components/MainScene.xml'
-    scene = screen.CreateScene("MainScene")
+    'Create a scene and load /components/MainScene.xml.
+    _ = screen.CreateScene("MainScene")
     screen.show()
 
+    ' Event loop.
     while(true)
         msg = wait(0, m.port)
         msgType = type(msg)
