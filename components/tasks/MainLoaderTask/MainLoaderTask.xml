@@ -4,4 +4,5 @@
         <field id="content" type="node" />
     </interface>
     <script type="text/brightscript" uri="MainLoaderTask.brs" />
+    <script type="text/brightscript" uri="../../lib/JsonHelper.brs" />
 </component>

@@ -1,6 +1,5 @@
 <component name="GridScreen" extends="Group"  initialFocus="RowList">
-    <script type="text/brightscript" uri="GridScreen.brs" />
-	 <interface>
+    <interface>
         <!-- Specifies the content for the Grid -->
         <field id="content" type="node" alias="RowList.content" />
     </interface>
@@ -20,4 +19,5 @@
             showRowCounter="[false]"
         />
     </children>
+    <script type="text/brightscript" uri="GridScreen.brs" />
 </component>

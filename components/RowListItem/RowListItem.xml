@@ -5,11 +5,11 @@
         <field id="width" type="float" alias="poster.width" />
         <field id="height" type="float" alias="poster.height" /> 
     </interface>
-    <script type="text/brightscript" uri="RowListItem.brs" />
     <children>
         <!-- Poster Image -->
         <Poster
             id="poster"
         />
     </children>
+    <script type="text/brightscript" uri="RowListItem.brs" />
 </component>
