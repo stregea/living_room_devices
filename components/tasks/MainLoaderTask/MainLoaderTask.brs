@@ -96,7 +96,7 @@ function GetCuratedRows(json as Object) as Object
 end function
 
 
-' Construct
+' Construct a RowListItem object.
 function ConstructRowListItem(title as String, items as Object) as Object
     row = {}
     row.title = title
