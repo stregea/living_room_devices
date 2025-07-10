@@ -102,12 +102,14 @@ function ConstructRowListItem(title as String, items as Object) as Object
     row.title = title
     row.children = []
 
-    for each item in items
-        if item <> invalid
-            data = GetItemData(item)
-            row.children.push(data)   
-        endif
-    end for
+    if items <> invalid
+        for each item in items
+            if item <> invalid
+                data = GetItemData(item)
+                row.children.push(data)   
+            endif
+        end for
+    end if
 
     return row
 end function
