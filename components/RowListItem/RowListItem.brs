@@ -18,7 +18,6 @@ sub OnContentSet()
     content = m.top.itemContent
     m.poster.uri = "pkg:/images/image_not_found.png"
 
-    ' print poster.loadStatus
     ' set poster uri if content is valid
     if content <> invalid and content.imageURI <> invalid 
         m.poster.uri = content.imageURI

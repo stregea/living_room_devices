@@ -44,15 +44,28 @@ end sub
 function GetItemData(item as Object) as Object
     data = {}
     data.id = item.contentId
-    data.imageURI = GetImageURL(item.image, "1.78")
-    data.title = GetVideoTitle(item.text.title)
+    data.imageURI = GetImageURL(item, "1.78")
+    data.title = CreateTitle(item) ' This is the title displayed on the GridScreen.
+    data.videoTitle = GetVideoTitle(item) ' This is the title displayed within the DetailsScreen.
+    data.rating = GetTVRating(item)
 
     return data
 end function
 
 
+function CreateTitle(item as Object) as String
+    title = GetVideoTitle(item)
+    rating = GetTVRating(item)
+
+    if title = invalid then return invalid
+    if rating = invalid then return title
+
+    return "%s | %s".Format(title, rating)
+end function
+
+
 ' Construct a list of RowItemData containing the data from the Standalone JSON.
-function GetStandaloneRows(json as object) as object
+function GetStandaloneRows(json as Object) as Object
     rows = []
 
     ' Read in the Standalone data.
