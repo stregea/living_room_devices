@@ -68,5 +68,5 @@
         </LayoutGroup>
     </children>
     <script type="text/brightscript" uri="DetailsScreen.brs" />
-    <script type="text/brightscript" uri="pkg:/components/lib/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/lib/Utils.brs" />
 </component>
