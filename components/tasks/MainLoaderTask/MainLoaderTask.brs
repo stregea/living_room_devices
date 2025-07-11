@@ -49,7 +49,6 @@ function GetItemData(item as Object) as Object
     data.videoTitle = GetVideoTitle(item) ' This is the title displayed within the DetailsScreen.
     data.rating = GetTVRating(item)
     data.imageBackgroundURI = GetImageURL(item, "tile", "1.78")
-    print GetTime(GetMediaMetaData(item, "runtimeMillis"))
     data.time = GetTime(GetMediaMetaData(item, "runtimeMillis"))
 
     return data
