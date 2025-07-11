@@ -19,15 +19,18 @@ function ContentListToSimpleNode(contentList as Object, nodeType = "ContentNode"
 end function
 
 
-' Helper function convert seconds to mm:ss format
-' getTime(138) returns 2:18
-function GetTime(length as Integer) as String
-    minutes = (length \ 60).ToStr()
-    seconds = length MOD 60
-    if seconds < 10
-       seconds = "0" + seconds.ToStr()
-    else
-       seconds = seconds.ToStr()
-    end if
-    return minutes + ":" + seconds
+' Helper function convert seconds to Xh Ym format.
+function GetTime(millis as Object) as Object
+
+    if millis = invalid then return invalid
+
+    seconds = millis / 1000
+
+    ' Perform Integer division to calculate hours and minutes.
+    hours = seconds \ 3600
+    minutes = (seconds MOD 3600) \ 60
+
+    if hours > 0 then return "%dh %dm".Format(hours, minutes)
+
+    return "%dm".Format(minutes)
 end function
