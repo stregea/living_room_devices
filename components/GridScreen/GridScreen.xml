@@ -10,14 +10,15 @@
         <Label
 	        id="title"
 	        width="1020"
-			translation="[20,170]"
+			translation="[20,190]"
+            font="font:MediumBoldSystemFont"
 	    />
         <!-- ZoomRowList to be used for auto-scaling -->
         <!-- https://developer.roku.com/docs/references/scenegraph/list-and-grid-nodes/zoomrowlist.md -->
         <ZoomRowList
             id="rowList"
             itemComponentName="RowListItem"
-            translation="[20,300]"
+            translation="[20,230]"
             showRowCounter="[false]"
         />
     </children>
