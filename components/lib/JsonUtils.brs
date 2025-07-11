@@ -36,13 +36,15 @@ end function
 
 
 ' Read in the image URL from an item within the list of the ShelfContainer's items.
-function GetImageURL(item as Object, aspectRatio as String) as String
-    tile = item.image.tile[aspectRatio]
+function GetImageURL(item as Object, imageType as String, aspectRatio as String) as Object
+    imageMetaData = item.image[imageType]
     
-    if tile = invalid then return invalid
+    if imageMetaData = invalid OR ImageMetaData[aspectRatio] = invalid then return invalid
     
-    for each key in tile
-        url = tile[key].default.url
+    image = imageMetaData[aspectRatio]
+
+    for each key in image
+        url = image[key].default.url
         if url <> invalid then return url
     end for
 
@@ -51,7 +53,7 @@ end function
 
 
 ' Read in the video title from an item within the list of the ShelfContainer's items.
-function GetVideoTitle(item as Object) as String
+function GetVideoTitle(item as Object) as Object
     fullTitle = item.text.title.full
 
     if fullTitle = invalid then return invalid
@@ -74,6 +76,16 @@ function GetTVRating(item as Object) as Object
     return ratings[0].value
 end function
 
+
+function GetMediaMetaData(item as Object, dataType as String) as Object
+    mediaMetaData = item.mediaMetaData
+
+    if mediaMetaData = invalid OR mediaMetaData[dataType] = invalid then return invalid
+
+    return mediaMetaData[dataType]
+end function
+
+' Get Release MetaData
 
 ' Retrieve a dictionary of Reference ID's and Titles.
 function GetReferenceIds(json as Object) as Object
