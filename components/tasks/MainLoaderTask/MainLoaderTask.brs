@@ -44,10 +44,13 @@ end sub
 function GetItemData(item as Object) as Object
     data = {}
     data.id = item.contentId
-    data.imageURI = GetImageURL(item, "1.78")
+    data.imageURI = GetImageURL(item, "tile", "1.78")
     data.title = CreateTitle(item) ' This is the title displayed on the GridScreen.
     data.videoTitle = GetVideoTitle(item) ' This is the title displayed within the DetailsScreen.
     data.rating = GetTVRating(item)
+    data.imageBackgroundURI = GetImageURL(item, "tile", "1.78")
+    print GetTime(GetMediaMetaData(item, "runtimeMillis"))
+    data.time = GetTime(GetMediaMetaData(item, "runtimeMillis"))
 
     return data
 end function

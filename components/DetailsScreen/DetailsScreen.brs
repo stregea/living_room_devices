@@ -7,25 +7,15 @@
 
 ' Initialize the DetailsScreen component.
 function Init()
-    ' observe "visible" so we can know when DetailsScreen change visibility
     m.top.ObserveField("visible", "OnVisibleChange")
-    ' observe "itemFocused" so we can know when another item gets in focus
     m.top.ObserveField("itemFocused", "OnItemFocusedChanged")
-    ' save a references to the DetailsScreen child components in the m variable
-    ' so we can access them easily from other functions
-    m.buttons = m.top.FindNode("buttons")
+
     m.poster = m.top.FindNode("poster") 
-    m.description = m.top.FindNode("descriptionLabel")
     m.timeLabel = m.top.FindNode("timeLabel")
     m.titleLabel = m.top.FindNode("titleLabel")
     m.releaseLabel = m.top.FindNode("releaseLabel")
     
-    ' create buttons
-    result = []
-    for each button in ["Play"] ' buttons list contains only "Play" button for now
-        result.Push({title : button})
-    end for
-    m.buttons.content = ContentListToSimpleNode(result) ' set list of buttons for DetailsScreen
+    m.poster.ObserveField("loadStatus", "OnLoadStatusChange")
 end function
 
 
@@ -40,12 +30,29 @@ sub OnVisibleChange()
 end sub
 
 
+' Invoked when another item is focused.
+sub OnItemFocusedChanged(event as Object)
+    focusedItem = event.GetData()
+    content = m.top.content.GetChild(focusedItem)
+
+    ' Populate DetailsScreen with item metadata.
+    SetDetailsContent(content)
+end sub
+
+
+' Observer handler that is used to set the Poster's image to the default "image_not_found.png" image.
+sub OnLoadStatusChange()
+    if m.poster.loadStatus = "failed"
+        m.poster.uri = "pkg:/images/image_not_found.png"
+    end if
+end sub
+
+
 ' Populate content details information
 sub SetDetailsContent(content as Object)
-    m.description.text = content.description ' set description of content
-    m.poster.uri = content.hdPosterUrl ' set url of content poster
-    m.timeLabel.text = GetTime(content.length) ' set length of content
-    m.titleLabel.text = content.title ' set title of content
+    m.poster.uri = content.imageBackgroundURI ' set url of content poster
+    m.timeLabel.text = content.time ' set length of content
+    m.titleLabel.text = content.videoTitle ' set title of content
     m.releaseLabel.text = content.releaseDate ' set release date of content
 end sub
 
@@ -59,16 +66,6 @@ sub OnJumpToItem()
     if content <> invalid and m.top.jumpToItem >= 0 and content.GetChildCount() > m.top.jumpToItem
         m.top.itemFocused = m.top.jumpToItem
     end if
-end sub
-
-
-' Invoked when another item is focused.
-sub OnItemFocusedChanged(event as Object)
-    focusedItem = event.GetData()
-    content = m.top.content.GetChild(focusedItem)
-
-    ' Populate DetailsScreen with item metadata.
-    SetDetailsContent(content)
 end sub
 
 
