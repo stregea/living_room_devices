@@ -36,8 +36,8 @@ end function
 
 
 ' Read in the image URL from an item within the list of the ShelfContainer's items.
-function GetImageURL(image as Object, aspectRatio as String) as String
-    tile = image.tile[aspectRatio]
+function GetImageURL(item as Object, aspectRatio as String) as String
+    tile = item.image.tile[aspectRatio]
     
     if tile = invalid then return invalid
     
@@ -51,8 +51,8 @@ end function
 
 
 ' Read in the video title from an item within the list of the ShelfContainer's items.
-function GetVideoTitle(title as Object) as String
-    fullTitle = title.full
+function GetVideoTitle(item as Object) as String
+    fullTitle = item.text.title.full
 
     if fullTitle = invalid then return invalid
 
@@ -62,6 +62,16 @@ function GetVideoTitle(title as Object) as String
     end for
 
     return invalid
+end function
+
+
+' Read in the TV rating
+function GetTVRating(item as Object) as Object
+    ratings = item.ratings
+    
+    if ratings = invalid then return invalid
+    
+    return ratings[0].value
 end function
 
 
