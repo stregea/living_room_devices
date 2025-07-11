@@ -4,10 +4,8 @@
          <!-- Overhang with Roku Developers logo -->
          <Overhang
             id="overhang"
-            showOptions="false"
-            showClock="true"
-            logoUri="pkg:/images/hd_overhang_logo.png"
-            translation="[0,60]"
+            showClock="false"
+            logoUri="pkg:/images/overhang_logo.png"
         />
         <!-- LoadingIndicator should be visible only in case of waiting for content -->
         <Label
