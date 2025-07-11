@@ -1,5 +1,5 @@
 ' ************************************************************************************
-' * Filename: Utils.brs
+' * Filename: utils.brs
 ' * Description: This file holds helper utility functions used throughout the project.
 ' * Author: Samuel Tregea
 ' ************************************************************************************

@@ -1,5 +1,5 @@
 ' **************************************************************************************************************
-' * Filename: JsonHelper.brs
+' * Filename: jsonutils.brs
 ' * Description: This file holds helper functions that help with parsing JSON data read from the following urls:
 ' *              https://cd-static.bamgrid.com/dp-117731241344/home.json
 ' *              https://cd-static.bamgrid.com/dp-117731241344/sets/<refId>.json
