@@ -1,5 +1,5 @@
 ' ************************************************************************************************************
-' * Filename: ViewStack.brs
+' * Filename: ViewStackLogic.brs
 ' * Description: This file will handle the logic for adding and removing screens to and from the current view.  
 ' * Author: Samuel Tregea
 ' ************************************************************************************************************

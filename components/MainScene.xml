@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="MainScene" extends="Scene"> 
     <children>
-         <!-- Overhang with Roku Developers logo -->
          <Overhang
             id="overhang"
             showClock="false"
@@ -20,11 +19,9 @@
             font="font:MediumBoldSystemFont"
         />
     </children>
-<!-- BrightScript Portion -->
-<script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
-<script type="text/brightscript" uri="pkg:/components/lib/ViewStack.brs" />
-<script type="text/brightscript" uri="pkg:/components/lib/GridScreenInitializer.brs" />
-<script type="text/brightscript" uri="pkg:/components/lib/FetchData.brs" />
-<script type="text/brightscript" uri="pkg:/components/lib/DetailsScreenInitializer.brs" />
-<!-- End of BrightScript Portion -->
+    <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Logic/ViewStackLogic.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Logic/GridScreenLogic.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Logic/ContentLoadLogic.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Logic/DetailsScreenLogic.brs" />
 </component>

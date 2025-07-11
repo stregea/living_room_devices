@@ -1,5 +1,5 @@
 ' ********************************************************************************************
-' * Filename: DetailsScreenInitializer.brs
+' * Filename: DetailsScreenLogic.brs
 ' * Description: This file will handle the logic for initializing the DetailsScreen component.  
 ' * Author: Samuel Tregea
 ' ********************************************************************************************

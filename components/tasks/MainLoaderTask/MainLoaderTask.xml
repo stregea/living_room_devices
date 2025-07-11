@@ -4,6 +4,6 @@
         <field id="content" type="node" />
     </interface>
     <script type="text/brightscript" uri="MainLoaderTask.brs" />
-    <script type="text/brightscript" uri="pkg:/components/lib/JsonUtils.brs" />
-    <script type="text/brightscript" uri="pkg:/components/lib/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/lib/jsonutils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/lib/utils.brs" />
 </component>

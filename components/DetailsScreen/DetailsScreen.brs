@@ -1,4 +1,3 @@
-
 ' ****************************************************************************************
 ' * Filename: DetailsScreen.brs
 ' * Description: This file serves as the main entry point for the DetailsScreen component.  

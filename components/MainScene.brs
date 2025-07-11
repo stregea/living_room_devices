@@ -11,7 +11,7 @@ sub Init()
 
   InitView()
   InitGridScreen()
-  FetchData()
+  FetchAndLoadData()
 end sub
 
 

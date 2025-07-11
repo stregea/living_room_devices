@@ -9,27 +9,23 @@
     </interface>
     <children>
         <LayoutGroup
-            translation="[1250, 300]"
+            translation="[1250, 250]"
             layoutDirection="horiz"
             horizAlignment="right"
-            itemSpacings="[40]">
+            itemSpacings="[10]">
             <LayoutGroup
                 itemSpacings="[14, 10]"
                 layoutDirection="vert">
 
                 <Poster
                     id="poster"
-                    width="357"
-                    loadWidth="357"
-                    height="201"
-                    loadHeight="201"
+                    width="500"
+                    loadWidth="500"
+                    height="281"
+                    loadHeight="281"
                     loadDisplayMode="scaleToFit"
                     />
-            </LayoutGroup>
-            <LayoutGroup
-                itemSpacings="[20]"
-                translation="[0, 208]">
-
+                
                 <Label
                     id="titleLabel"
                     width="400"
@@ -37,7 +33,11 @@
                     horizAlign="left"
                     font="font:MediumBoldSystemFont"
                 />
-
+            </LayoutGroup>
+            <LayoutGroup
+                itemSpacings="[20]"
+                translation="[0, 208]">
+                <!--todo: TV Rating -->
                 <Label
                     id="timeLabel"
                     width="357"
@@ -45,7 +45,7 @@
                     horizAlign="left"
                     font="font:MediumBoldSystemFont"
                 />
-
+                
                 <Label
                     id="releaseLabel"
                     width="357"
@@ -57,5 +57,5 @@
         </LayoutGroup>
     </children>
     <script type="text/brightscript" uri="DetailsScreen.brs" />
-    <script type="text/brightscript" uri="pkg:/components/lib/Utils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/lib/utils.brs" />
 </component>

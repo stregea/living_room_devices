@@ -10,7 +10,6 @@ sub Init()
     m.rowList.SetFocus(true)
 
     m.title = m.top.FindNode("title")
-    m.description = m.top.FindNode("description")
 
     ' Create and set an observer for the rowItemFocused attribute
     ' for items within the RowList.
