@@ -47,14 +47,14 @@ function GetItemData(item as Object) as Object
     data.imageURI = GetImageURL(item, "tile", "1.78")
     data.title = CreateTitle(item) ' This is the title displayed on the GridScreen.
     data.videoTitle = GetVideoTitle(item) ' This is the title displayed within the DetailsScreen.
-    data.rating = GetTVRating(item)
-    data.imageBackgroundURI = GetImageURL(item, "tile", "1.78")
-    data.time = GetTime(GetMediaMetaData(item, "runtimeMillis"))
-
+    data.detailsImageURI = GetImageURL(item, "tile", "1.78")
+    data.description = CreateDescription(item)
+    
     return data
 end function
 
 
+' Construct a Title for the main GridScreen in the format: Title | Rating.
 function CreateTitle(item as Object) as String
     title = GetVideoTitle(item)
     rating = GetTVRating(item)
@@ -65,6 +65,35 @@ function CreateTitle(item as Object) as String
     return "%s | %s".Format(title, rating)
 end function
 
+
+' Construct a dynamic Description string that will be displayed within the DetailsScreen.
+function CreateDescription(item as Object) as String
+    description = ""
+    releaseYear = GetReleaseMetaData(item, "releaseYear")
+    runtime = GetTime(GetMediaMetaData(item, "runtimeMillis"))
+    format = GetMediaMetaData(item, "format")
+    rating = GetTVRating(item)
+
+    descriptionArray = [releaseYear, runtime, format, rating]
+    
+    ' Build the description based on the contents within the descriptionArray.
+    validItemCount = 0
+    for i = 0 to descriptionArray.Count()
+        if descriptionArray[i] <> invalid
+
+            if validItemCount = 0
+                description = descriptionArray[i].ToStr()
+            else
+                description = "%s • %s".Format(description, descriptionArray[i].ToStr())
+            end if
+
+            validItemCount = validItemCount + 1
+        end if
+    end for
+
+    return description
+end function
+    
 
 ' Construct a list of RowItemData containing the data from the Standalone JSON.
 function GetStandaloneRows(json as Object) as Object

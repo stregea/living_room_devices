@@ -10,10 +10,10 @@ function Init()
     m.top.ObserveField("itemFocused", "OnItemFocusedChanged")
 
     m.poster = m.top.FindNode("poster") 
-    m.timeLabel = m.top.FindNode("timeLabel")
-    m.titleLabel = m.top.FindNode("titleLabel")
-    m.releaseLabel = m.top.FindNode("releaseLabel")
     
+    m.titleLabel = m.top.FindNode("titleLabel")
+    m.descriptionLabel = m.top.FindNode("descriptionLabel")
+
     m.poster.ObserveField("loadStatus", "OnLoadStatusChange")
 end function
 
@@ -47,12 +47,12 @@ sub OnLoadStatusChange()
 end sub
 
 
-' Populate content details information
+' Populate the details to display on the screen.
 sub SetDetailsContent(content as Object)
-    m.poster.uri = content.imageBackgroundURI ' set url of content poster
-    m.timeLabel.text = content.time ' set length of content
-    m.titleLabel.text = content.videoTitle ' set title of content
-    m.releaseLabel.text = content.releaseDate ' set release date of content
+    m.poster.uri = content.detailsImageURI
+
+    m.titleLabel.text = content.videoTitle
+    m.descriptionLabel.text = content.description
 end sub
 
 
@@ -72,14 +72,15 @@ end sub
 function OnkeyEvent(key as String, press as Boolean) as Boolean
     result = false
     if press
-        currentItem = m.top.itemFocused 
+        previousItem = m.top.itemFocused - 1
+        nextItem = m.top.itemFocused + 1
         ' navigate to the left item in case of "left" keypress
         if key = "left"
-            m.top.jumpToItem = currentItem - 1 
+            m.top.jumpToItem = previousItem
             result = true
         ' navigate to the right item in case of "right" keypress
         else if key = "right" 
-            m.top.jumpToItem = currentItem + 1 
+            m.top.jumpToItem = nextItem
             result = true
         end if
     end if

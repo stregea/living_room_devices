@@ -9,13 +9,18 @@
     </interface>
     <children>
         <LayoutGroup
-            translation="[1250, 250]"
-            layoutDirection="horiz"
-            horizAlignment="right"
+            translation="[650, 250]"
+            layoutDirection="vert"
+            horizAlignment="center"
             itemSpacings="[10]">
-            <LayoutGroup
-                itemSpacings="[14, 10]"
-                layoutDirection="vert">
+
+                <Label
+                    id="titleLabel"
+                    width="400"
+                    wrap="true"
+                    horizAlign="center"
+                    font="font:MediumBoldSystemFont"
+                />
 
                 <Poster
                     id="poster"
@@ -25,35 +30,14 @@
                     loadHeight="281"
                     loadDisplayMode="scaleToFit"
                     />
-                
+            
                 <Label
-                    id="titleLabel"
-                    width="400"
-                    wrap="true"
-                    horizAlign="left"
-                    font="font:MediumBoldSystemFont"
-                />
-            </LayoutGroup>
-            <LayoutGroup
-                itemSpacings="[20]"
-                translation="[0, 208]">
-                <!--todo: TV Rating -->
-                <Label
-                    id="timeLabel"
-                    width="357"
+                    id="descriptionLabel"
+                    width="500"
                     wrap="false"
-                    horizAlign="left"
-                    font="font:MediumBoldSystemFont"
+                    horizAlign="center"
+                    font="font:SmallBoldSystemFont"
                 />
-                
-                <Label
-                    id="releaseLabel"
-                    width="357"
-                    wrap="false"
-                    horizAlign="left"
-                    font="font:MediumBoldSystemFont"
-                />
-            </LayoutGroup>
         </LayoutGroup>
     </children>
     <script type="text/brightscript" uri="DetailsScreen.brs" />

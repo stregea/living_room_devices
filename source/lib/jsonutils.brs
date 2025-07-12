@@ -77,15 +77,26 @@ function GetTVRating(item as Object) as Object
 end function
 
 
-function GetMediaMetaData(item as Object, dataType as String) as Object
+' Return parameterized metadata from the mediaMetaData object.
+function GetMediaMetaData(item as Object, property as String) as Object
     mediaMetaData = item.mediaMetaData
 
-    if mediaMetaData = invalid OR mediaMetaData[dataType] = invalid then return invalid
+    if mediaMetaData = invalid OR mediaMetaData[property] = invalid then return invalid
 
-    return mediaMetaData[dataType]
+    return mediaMetaData[property]
 end function
 
-' Get Release MetaData
+
+' Return parameterized metadata from the releases object.
+function GetReleaseMetaData(item as Object, property as String) as Object
+
+    releaseMetaData = item.releases
+
+    if releaseMetaData = invalid OR releaseMetaData[0] = invalid then return invalid
+
+    return releaseMetaData[0][property]
+end function
+
 
 ' Retrieve a dictionary of Reference ID's and Titles.
 function GetReferenceIds(json as Object) as Object
