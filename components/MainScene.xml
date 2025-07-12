@@ -7,17 +7,10 @@
             logoUri="pkg:/images/overhang_logo.png"
         />
         <!-- LoadingIndicator should be visible only in case of waiting for content -->
-        <Label
-            id="loadingIndicator"
-            text="Loading..."
-            width="1280"
-            height="720"
-            translation="[0, 0]"
-            horizAlign="center"
-            vertAlign="center"
-            visible="false"
-            font="font:MediumBoldSystemFont"
-        />
+        <!-- https://developer.roku.com/docs/references/scenegraph/widget-nodes/busyspinner.md -->
+        <BusySpinner 
+            id = "loadingIndicator"
+            visible = "false" />
     </children>
     <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
     <script type="text/brightscript" uri="pkg:/components/Logic/ViewStackLogic.brs" />

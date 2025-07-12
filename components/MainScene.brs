@@ -7,7 +7,6 @@
 ' Initialize the MainScene.
 sub Init()
   m.top.backgroundUri= "pkg:/images/background.png"
-  m.loadingIndicator = m.top.FindNode("loadingIndicator")
 
   InitView()
   InitGridScreen()
