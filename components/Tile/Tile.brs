@@ -12,6 +12,10 @@ sub Init()
 
     ' Create an observer to handle thumbnails that failed to load.
     m.poster.ObserveField("loadStatus", "OnLoadStatusChange")
+
+    ' Begin the fade in animation.
+    maskgroupanimation = m.top.findNode("MaskGroupAnimation")
+    maskgroupanimation.control = "start"
 end sub
 
 

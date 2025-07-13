@@ -8,12 +8,34 @@
         <field id="height" type="float" alias="poster.height" />
     </interface>
     <children>
-        <!-- Poster Image -->
-        <Poster
-            id="poster"
-            translation = "[10, 10]"  
-            scaleRotateCenter = "[256.0, 144.0]"
-        />
+
+        <!-- MaskGroup used to animate Tile with a fade in effect on render. -->
+        <!-- https://github.com/rokudev/samples/tree/master/ux%20components/control/MaskGroupExample -->
+        <MaskGroup
+            id = "maskGroup" 
+            maskuri = "pkg:/images/gradient_linear.png">
+            
+            <!-- Poster Image -->
+            <Poster
+                id="poster"
+                translation = "[10, 10]"  
+                scaleRotateCenter = "[256.0, 144.0]"
+            />
+        </MaskGroup>
+
+        <!-- Animation used for the fade-in effect -->
+        <Animation 
+            id = "MaskGroupAnimation" 
+            duration = "3" 
+            easeFunction = "linear" 
+            repeat = "false" >
+                    
+            <Vector2DFieldInterpolator 
+                id = "interpolator" 
+                fieldToInterp = "maskGroup.maskOffset" 
+                key = "[ 0.0, 0.5, 1.0 ]" 
+                keyValue = "[ [-512,0], [512,0], [512,0] ]" />
+        </Animation>
     </children>
     <script type="text/brightscript" uri="Tile.brs" />
 </component>
