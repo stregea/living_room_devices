@@ -26,7 +26,7 @@ end sub
 function OnKeyEvent(key as String, press as Boolean) as Boolean
     result = false
     if press
-        ' Handle "back" key press
+        ' Handle "back" key press.
         if key = "back"
             numberOfScreens = m.viewStack.Count()
             ' Close the top screen if there are two or more screens within the view stack.
