@@ -5,7 +5,9 @@
 ' * Author: Samuel Tregea
 ' *******************************************************************************************
 
+' ****************************************
 ' Initialize the MainLoaderTask component.
+' ****************************************
 sub Init()
     ' set the name of the function in the Task node component to be executed when the state field changes to RUN
     ' in our case this method executed after the following cmd: m.contentTask.control = "run"
@@ -14,49 +16,43 @@ sub Init()
 end sub
 
 
+' ***************************************************************
 ' Fetch and populate the content to display within the GridScene.
+' ***************************************************************
 sub GetContent()
     rootChildren = []
-    ' request the content feed from the API
+    ' Request the content feed from the API.
     json = GetJSONResponse("https://cd-static.bamgrid.com/dp-117731241344/home.json")
 
-    ' parse the feed and build a tree of ContentNodes to populate the GridScene.
+    ' Parse the feed and build a tree of ContentNodes to populate the GridScene.
     if json <> invalid
 
-        rootChildren.Append(GetStandaloneRows(json))
+        ' Parse and handle the metadata from the response from https://cd-static.bamgrid.com/dp-117731241344/home.json
+        rootChildren.Append(GetStandardCollectionRows(json))
 
-        rootChildren.Append(GetCuratedRows(json))
+        ' Parse and handle metadata from the response from https://cd-static.bamgrid.com/dp-117731241344/sets/<refId>.json
+        rootChildren.Append(GetCuratedSetRows(json))
 
-        ' set up a root ContentNode to represent rowList on the GridScreen.
+        ' Set up a root ContentNode to represent rowList on the GridScreen.
         rowListNode = CreateObject("roSGNode", "ContentNode")
         rowListNode.Update({
             children: rootChildren
         }, true)
 
-        ' populate content field with root content node.
-        ' Observer(see OnMainContentLoaded in MainScene.brs) is invoked at that moment
+        ' Populate content field with root content node.
+        ' Observer(see OnMainContentLoaded in MainScene.brs) is invoked at that moment.
         m.top.content = rowListNode
     end if
 end sub
 
 
-' Read in the data from the JSON response to pass to the RowListItem.
-function GetItemData(item as Object) as Object
-    data = {}
-    data.id = item.contentId
-    data.imageURI = GetImageURL(item, "tile", "1.78")
-    data.title = CreateTitle(item) ' This is the title displayed on the GridScreen.
-    data.videoTitle = GetVideoTitle(item) ' This is the title displayed within the DetailsScreen.
-    data.detailsImageURI = GetImageURL(item, "tile", "1.78")
-    data.description = CreateDescription(item)
-    
-    return data
-end function
-
-
-' Construct a Title for the main GridScreen in the format: Title | Rating.
+' ***************************************************************
+' Construct a title for a RowListItem within the GridScreen.
+' @param item - The object containing the json metadata to parse.
+' @returns a formated tile in the format: "Title | Rating".
+' ***************************************************************
 function CreateTitle(item as Object) as String
-    title = GetVideoTitle(item)
+    title = GetTitle(item)
     rating = GetTVRating(item)
 
     if title = invalid then return invalid
@@ -66,7 +62,11 @@ function CreateTitle(item as Object) as String
 end function
 
 
-' Construct a dynamic Description string that will be displayed within the DetailsScreen.
+' *****************************************************************************************************
+' Construct a dynamic description string that will be displayed within the DetailsScreen.
+' @param item - The object containing the json metadata to parse.
+' @returns a dynamically created description in the format: "Release Year • Runtime • Format • Rating".
+' *****************************************************************************************************
 function CreateDescription(item as Object) as String
     description = ""
     releaseYear = GetReleaseMetaData(item, "releaseYear")
@@ -93,19 +93,66 @@ function CreateDescription(item as Object) as String
 
     return description
 end function
-    
 
-' Construct a list of RowItemData containing the data from the Standalone JSON.
-function GetStandaloneRows(json as Object) as Object
+
+' *********************************************************************************************************
+' Read in the data from the JSON response to pass to the RowListItem.
+' @param item - The object containing the json metadata to parse.
+' @returns an object containing parsed data to display to the user within the GridScreen and DetailsScreen.
+' *********************************************************************************************************
+function GetData(item as Object) as Object
+    data = {
+        id : item.contentId,
+        imageURI : GetImageURL(item, "tile", "1.78"),
+        title : CreateTitle(item) ' This is the title displayed on the GridScreen.
+        detailsTitle : GetTitle(item) ' This is the title displayed within the DetailsScreen.
+        detailsImageURI : GetImageURL(item, "tile", "1.78"),
+        description : CreateDescription(item)
+    }
+    
+    return data
+end function
+
+
+' *******************************************************************
+' Construct a row containing the metadata for RowListItem's.
+' @param title - The title for the row.
+' @param items - The items to place within the row of the GridScreen.
+' @returns a row containing a list of RowListItem metadata.
+' *******************************************************************
+function ConstructRow(title as String, items as Object) as Object
+    row = {}
+    row.title = title
+    row.children = []
+
+    if items <> invalid
+        for each item in items
+            if item <> invalid
+                data = GetData(item)
+                row.children.push(data)   
+            endif
+        end for
+    end if
+
+    return row
+end function
+
+
+' *************************************************************************************
+' Construct a list of RowItemData containing the data from a StandardCollection object.
+' @param json - The json containing the StandardCollection metadata.
+' @returns a list of RowListItem's populated with data from the StandardCollection.
+' *************************************************************************************
+function GetStandardCollectionRows(json as Object) as Object
     rows = []
 
-    ' Read in the Standalone data.
-    containers = GetContainers(json)
+    ' Read in the StandardCollection data.
+    containers = GetStandardCollectionContainers(json)
     for each container in containers           
         
-        ' Read in and parse the standalone dataset.
+        ' Read in and parse the StandardCollection dataset.
         if container <> invalid
-            row = ConstructRowListItem(GetContainerTitle(container), GetStandaloneItems(container))
+            row = ConstructRow(GetShelfContainerTitle(container), GetStandardCollectionItems(container))
 
             ' Only add the row if there is data available.
             if NOT row.children.IsEmpty() then rows.push(row)
@@ -117,8 +164,12 @@ function GetStandaloneRows(json as Object) as Object
 end function
 
 
-' Construct a list of RowListItem's containing the data from the Curated JSON.
-function GetCuratedRows(json as Object) as Object
+' *****************************************************************************
+' Construct a list of RowItemData containing the data from a CuratedSet object.
+' @param json - The json containing the CuratedSet metadata.
+' @returns a list of rows populated with data from the CuratedSet.
+' *****************************************************************************
+function GetCuratedSetRows(json as Object) as Object
     rows = []
 
     ' Read in the Reference ID's data.
@@ -128,7 +179,7 @@ function GetCuratedRows(json as Object) as Object
     if refIds <> invalid
         for each refId in refIds
             if refId <> invalid
-                row = ConstructRowListItem(refIds[refId], GetCuratedItems(refId))
+                row = ConstructRow(refIds[refId], GetCuratedItems(refId))
 
                 ' Only add the row if there is data available.
                 if NOT row.children.IsEmpty() then rows.push(row)
@@ -137,23 +188,4 @@ function GetCuratedRows(json as Object) as Object
     end if
     
     return rows
-end function
-
-
-' Construct a RowListItem object.
-function ConstructRowListItem(title as String, items as Object) as Object
-    row = {}
-    row.title = title
-    row.children = []
-
-    if items <> invalid
-        for each item in items
-            if item <> invalid
-                data = GetItemData(item)
-                row.children.push(data)   
-            endif
-        end for
-    end if
-
-    return row
 end function

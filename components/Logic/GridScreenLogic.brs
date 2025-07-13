@@ -4,7 +4,9 @@
 ' * Author: Samuel Tregea
 ' *****************************************************************************************
 
+' **********************************************
 ' Initialize the GridScreen, then show the View.
+' **********************************************
 sub InitGridScreen()
     ' Construct the GridScreen component.
     m.GridScreen = CreateObject("roSGNode", "GridScreen")
@@ -17,7 +19,10 @@ sub InitGridScreen()
 end sub
 
 
+' ********************************************************************************
 ' Event handler to open a Details Screen for the event when a RowItem is selected.
+' @param event - The item selection event.
+' ********************************************************************************
 sub OnGridScreenItemSelected(event as Object)
     grid = event.GetRoSGNode()
     ' extract the row and column indexes of the item the user selected

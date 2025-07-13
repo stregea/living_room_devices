@@ -4,7 +4,9 @@
 ' * Author: Samuel Tregea
 ' ***************************************************************************************
 
+' *************************
 ' Initialize the MainScene.
+' *************************
 sub Init()
   m.top.backgroundUri= "pkg:/images/background.png"
 
@@ -14,21 +16,25 @@ sub Init()
 end sub
 
 
-' The OnKeyEvent() function receives remote control key events
-function OnkeyEvent(key as String, press as Boolean) as Boolean
+' ***************************************************************************************
+' Event Handler for remote control key events within in the Main Screen.
+' The user can press the back button to change/exit scenes within the view.
+' @param key - The key on the remote that was pressed.
+' @param press - Boolean that indicated whether there was a button press or not.
+' @return true or false based on a button press.
+' ***************************************************************************************
+function OnKeyEvent(key as String, press as Boolean) as Boolean
     result = false
     if press
-        ' handle "back" key press
+        ' Handle "back" key press
         if key = "back"
             numberOfScreens = m.viewStack.Count()
-            ' close top screen if there are two or more screens in the screen stack
+            ' Close the top screen if there are two or more screens within the view stack.
             if numberOfScreens > 1
                 RemoveScreenFromView(invalid)
                 result = true
             end if
         end if
     end if
-    ' The OnKeyEvent() function must return true if the component handled the event,
-    ' or false if it did not handle the event.
     return result
 end function

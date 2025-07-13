@@ -1,16 +1,20 @@
 ' ********************************************************************
-' * Filename: Main.brs
+' * Filename: main.brs
 ' * Description: This file will serve as the main channel entry point. 
 ' * Author: Samuel Tregea
 ' ********************************************************************
 
+' ************
 ' Main Method.
+' ************
 sub Main()
     ShowChannelRSGScreen()
 end sub
 
 
+' ****************************
 ' Display the Roku SceneGraph.
+' ****************************
 sub ShowChannelRSGScreen() 
     'Indicate this is a Roku SceneGraph application.
     screen = CreateObject("roSGScreen")

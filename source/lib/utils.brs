@@ -4,8 +4,11 @@
 ' * Author: Samuel Tregea
 ' ************************************************************************************
 
-
-' Helper function convert seconds to Xh Ym format.
+' ********************************************************
+' Helper function to convert milliseconds to Xh Ym format.
+' @param millis - The total number of milliseconds.
+' @return a string in the form: Xh Ym or Xm.
+' ********************************************************
 function GetTime(millis as Object) as Object
 
     if millis = invalid then return invalid

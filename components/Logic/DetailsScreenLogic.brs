@@ -4,7 +4,9 @@
 ' * Author: Samuel Tregea
 ' ********************************************************************************************
 
+' **************************************************************
 ' Create a new instance of a Details Screen and Add to the View.
+' **************************************************************
 sub ShowDetailsScreen(content as Object, selectedItem as Integer)
     detailsScreen = CreateObject("roSGNode", "DetailsScreen")
     detailsScreen.content = content
@@ -16,8 +18,11 @@ sub ShowDetailsScreen(content as Object, selectedItem as Integer)
 end sub
 
 
+' *********************************************************
 ' Invoked when DetailsScreen "visible" field is changed,
 ' which is invoked when the user presses the 'back' button.
+' @param event - The visibility change event.
+' *********************************************************
 sub OnDetailsScreenVisibilityChanged(event as Object) 
     visible = event.GetData()
     detailsScreen = event.GetRoSGNode()

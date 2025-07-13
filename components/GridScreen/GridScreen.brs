@@ -4,7 +4,9 @@
 ' * Author: Samuel Tregea
 ' *************************************************************************************
 
+' ************************************
 ' Initialize the GridScreen component.
+' ************************************
 sub Init()
     m.rowList = m.top.FindNode("RowList")
     m.rowList.SetFocus(true)
@@ -17,7 +19,9 @@ sub Init()
 end sub
 
 
+' *************************************************
 ' Observer that is invoked when an item is focused.
+' *************************************************
 sub OnItemFocusedObserver()
     focusedIndex = m.rowList.rowItemFocused
     row = m.rowList.content.GetChild(focusedIndex[0])

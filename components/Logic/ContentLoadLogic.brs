@@ -4,7 +4,9 @@
 ' * Author: Samuel Tregea
 ' ************************************************************************************
 
+' **************************************
 ' Fetch and load the data into the view.
+' **************************************
 sub FetchAndLoadData()
     ' Setup and display the loading indicator while data is being fetched.
     m.loadingIndicator = m.top.FindNode("loadingIndicator")
@@ -20,7 +22,9 @@ sub FetchAndLoadData()
 end sub
 
 
+' **********************************************************
 ' Observer that is invoked when content is ready to be used.
+' **********************************************************
 sub OnMainContentLoadedObserver()
     m.GridScreen.SetFocus(true)
     m.loadingIndicator.visible = false ' hide loading indicator because content was retrieved.
@@ -28,15 +32,16 @@ sub OnMainContentLoadedObserver()
 end sub
 
 
+' ****************************************************************************************************
 ' Observer that is invoked to center and show the loading indicator animation.
 ' Reference: https://github.com/rokudev/samples/tree/master/ux%20components/widgets/BusySpinnerExample
+' ****************************************************************************************************
 sub ShowLoadingIndicator()
     if(m.loadingIndicator.poster.loadStatus = "ready")
-        centerx = (1280 - m.loadingIndicator.poster.bitmapWidth) / 2
-        centery = (720 - m.loadingIndicator.poster.bitmapHeight) / 2
+        centerX = (1280 - m.loadingIndicator.poster.bitmapWidth) / 2
+        centerY = (720 - m.loadingIndicator.poster.bitmapHeight) / 2
 
-        m.loadingIndicator.translation = [ centerx, centery ]
+        m.loadingIndicator.translation = [ centerX, centerY ]
         m.loadingIndicator.visible = true
     end if
 end sub
-

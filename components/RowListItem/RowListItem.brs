@@ -4,7 +4,9 @@
 ' * Author: Samuel Tregea
 ' **************************************************************************************************
 
-' Initialize the MainLoaderTask component.
+' *************************************
+' Initialize the RowListItem component.
+' *************************************
 sub Init()
     m.poster = m.top.FindNode("poster")
 
@@ -13,15 +15,19 @@ sub Init()
 end sub
 
 
+' ******************************************************************************************************************************
 ' Scale the Poster on focus.
 ' Reference: https://developer.roku.com/en-gb/docs/references/scenegraph/list-and-grid-nodes/overview.md#custom-focus-indicators
+' ******************************************************************************************************************************
 sub OnFocus() 
     scale = 1 + (m.top.focusPercent * 0.08) 
     m.poster.scale = [scale, scale] 
 end sub
 
 
+' ********************************************************
 ' Handler that is invoked when item metadata is retrieved.
+' ********************************************************
 sub OnContentSet()
     content = m.top.itemContent
     m.poster.uri = "pkg:/images/image_not_found.png"
@@ -33,7 +39,9 @@ sub OnContentSet()
 end sub
 
 
-' Observer to set the Poster's image to the default "image_not_found.png" image.
+' ****************************************************************************************************
+' Observer to set the Poster's image to the default "image_not_found.png" image on loadStatus failure.
+' ****************************************************************************************************
 sub OnLoadStatusChange()
     if m.poster.loadStatus = "failed"
         m.poster.uri = "pkg:/images/image_not_found.png"

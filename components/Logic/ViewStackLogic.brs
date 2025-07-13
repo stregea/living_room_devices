@@ -4,13 +4,18 @@
 ' * Author: Samuel Tregea
 ' ************************************************************************************************************
 
+' ************************************************************************************
 ' Initialize a stack to contain screens that will be viewable within the current View.
+' ************************************************************************************
 sub InitView()
     m.viewStack = []
 end sub
 
 
+' ********************************************************
 ' Add a new screen to the stack and make it visible.
+' @param newScreenNode - The Node to add to the ViewStack.
+' ********************************************************
 sub AddScreenToView(newScreenNode as Object)
     prev = m.viewStack.Peek()
 
@@ -29,7 +34,10 @@ sub AddScreenToView(newScreenNode as Object)
 end sub
 
 
+' *******************************************************************************************
 ' Remove the current screen from the stack, display the previous screen.
+' @param currentScreenNode - The current screen within the view to remove from the ViewStack.
+' *******************************************************************************************
 sub RemoveScreenFromView(currentScreenNode as Object)
     prevScreen = m.viewStack.Peek()
 

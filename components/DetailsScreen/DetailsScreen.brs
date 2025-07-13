@@ -4,9 +4,11 @@
 ' * Author: Samuel Tregea
 ' ****************************************************************************************
 
+' ***************************************
 ' Initialize the DetailsScreen component.
-function Init()
-    m.top.ObserveField("visible", "OnVisibleChange")
+' ***************************************
+sub Init()
+    m.top.ObserveField("visible", "OnVisibilityChange")
     m.top.ObserveField("itemFocused", "OnItemFocusedChanged")
 
     m.poster = m.top.FindNode("poster") 
@@ -15,12 +17,13 @@ function Init()
     m.descriptionLabel = m.top.FindNode("descriptionLabel")
 
     m.poster.ObserveField("loadStatus", "OnLoadStatusChange")
-end function
+end sub
 
-
+' ********************************************************************
 ' Invoked when DetailsScreen "visible" field is changed,
 ' which is invoked when the user presses the "OK" button on a RowItem.
-sub OnVisibleChange()
+' ********************************************************************
+sub OnVisibilityChange()
     ' set focus for buttons list when DetailsScreen become visible
     if m.top.visible = true
         m.buttons.SetFocus(true)
@@ -29,7 +32,10 @@ sub OnVisibleChange()
 end sub
 
 
+' ******************************************
 ' Invoked when another item is focused.
+' @param event - The itemFocus change event.
+' ******************************************
 sub OnItemFocusedChanged(event as Object)
     focusedItem = event.GetData()
     content = m.top.content.GetChild(focusedItem)
@@ -39,7 +45,9 @@ sub OnItemFocusedChanged(event as Object)
 end sub
 
 
+' ***************************************************************************************************
 ' Observer handler that is used to set the Poster's image to the default "image_not_found.png" image.
+' ***************************************************************************************************
 sub OnLoadStatusChange()
     if m.poster.loadStatus = "failed"
         m.poster.uri = "pkg:/images/image_not_found.png"
@@ -47,16 +55,20 @@ sub OnLoadStatusChange()
 end sub
 
 
+' **************************************************************
 ' Populate the details to display on the screen.
+' @param content - The content to set within the Details Screen.
+' **************************************************************
 sub SetDetailsContent(content as Object)
     m.poster.uri = content.detailsImageURI
-
-    m.titleLabel.text = content.videoTitle
+    m.titleLabel.text = content.detailsTitle
     m.descriptionLabel.text = content.description
 end sub
 
 
-' Invoked when jumpToItem field is populated
+' ***********************************************
+' Invoked when the jumpToItem field is populated.
+' ***********************************************
 sub OnJumpToItem() 
     content = m.top.content
 
@@ -68,19 +80,26 @@ sub OnJumpToItem()
 end sub
 
 
-' The OnKeyEvent() function receives remote control key events.
-function OnkeyEvent(key as String, press as Boolean) as Boolean
+' ***************************************************************************************
+' Event Handler for remote control key events within in the Details Screen.
+' The user can press the left or right key to change the description for movies/TV shows.
+' @param key - The key on the remote that was pressed.
+' @param press - Boolean that indicated whether there was a button press or not.
+' @return true or false based on a button press.
+' ***************************************************************************************
+function OnKeyEvent(key as String, press as Boolean) as Boolean
     result = false
     if press
-        previousItem = m.top.itemFocused - 1
-        nextItem = m.top.itemFocused + 1
-        ' navigate to the left item in case of "left" keypress
+        leftItem = m.top.itemFocused - 1
+        rightItem = m.top.itemFocused + 1
+
+        ' Navigate to the left item in case of "left" keypress.
         if key = "left"
-            m.top.jumpToItem = previousItem
+            m.top.jumpToItem = leftItem
             result = true
-        ' navigate to the right item in case of "right" keypress
+        ' Navigate to the right item in case of "right" keypress.
         else if key = "right" 
-            m.top.jumpToItem = nextItem
+            m.top.jumpToItem = rightItem
             result = true
         end if
     end if

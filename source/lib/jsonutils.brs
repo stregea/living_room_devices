@@ -6,7 +6,11 @@
 ' * Author: Samuel Tregea
 ' **************************************************************************************************************
 
+'************************************************************************
 ' Construct the JSON response from the URL containing the Home Page data.
+' @param url - The url to make the request to.
+' @return the response of the GET request.
+'************************************************************************
 function GetJSONResponse(url as String) as Object
     ' Request the content feed from the API.
     urlXfer = CreateObject("roURLTransfer")
@@ -17,32 +21,52 @@ function GetJSONResponse(url as String) as Object
 end function
 
 
-' Retrieve the list of ShelfContainers from the JSON response.
-function GetContainers(json as Object) as Object
+'****************************************************************************
+' Retrieve the list of StandardCollection ShelfContainers from JSON metadata.
+' @param json - The object to parse.
+' @returns a list of containers held within the StandardCollection objects.
+'****************************************************************************
+function GetStandardCollectionContainers(json as Object) as Object
     return json.data.StandardCollection.containers
 end function
 
 
+'*****************************************************************
 ' Retrieve the title of the ShelfContainer from the JSON response.
-function GetContainerTitle(container as Object) as Object
+' @param json - The object to parse.
+' @returns the title of the ShelfContainer
+'*****************************************************************
+function GetShelfContainerTitle(container as Object) as Object
     return container.set.text.title.full.set.default.content
 end function
 
 
-' Return the array of Standalone items from a ShelfContainer.
-function GetStandaloneItems(container as Object) as Object
+'*********************************************************************
+' Get the array of StandardCollection items from a ShelfContainer.
+' @param container - The container to parse.
+' @return the array of StandardCollection items from a ShelfContainer.
+'*********************************************************************
+function GetStandardCollectionItems(container as Object) as Object
     return container.set.items
 end function
 
 
-' Read in the image URL from an item within the list of the ShelfContainer's items.
-function GetImageURL(item as Object, imageType as String, aspectRatio as String) as Object
-    imageMetaData = item.image[imageType]
+'*******************************************************************************
+' Read the image URL from an item within the list of the ShelfContainer's items.
+' @param json - The object to parse.
+' @param imageType - The type of image to be requested. 
+'                    (hero_collection, hero_tile, logo, logo_layer, tile)
+' @param aspectRatio - The requested aspectRatio within the imageType.
+' @returns the url based on the imageType and aspectRatio parameters.
+'********************************************************************************
+function GetImageURL(json as Object, imageType as String, aspectRatio as String) as Object
+    imageMetaData = json.image.tile
     
     if imageMetaData = invalid OR ImageMetaData[aspectRatio] = invalid then return invalid
     
     image = imageMetaData[aspectRatio]
 
+    ' Key can be either "default", "program", or "series".
     for each key in image
         url = image[key].default.url
         if url <> invalid then return url
@@ -52,12 +76,17 @@ function GetImageURL(item as Object, imageType as String, aspectRatio as String)
 end function
 
 
-' Read in the video title from an item within the list of the ShelfContainer's items.
-function GetVideoTitle(item as Object) as Object
-    fullTitle = item.text.title.full
+'*************************************************************
+' Read the title from an object containing the title metadata.
+' @param json - The object to parse.
+' @returns the title metadata.
+'*************************************************************
+function GetTitle(json as Object) as Object
+    fullTitle = json.text.title.full
 
     if fullTitle = invalid then return invalid
 
+    ' Key can be either "program", or "series".
     for each key in fullTitle
         titleText = fullTitle[key].default.content
         if titleText <> invalid then return titleText
@@ -67,9 +96,13 @@ function GetVideoTitle(item as Object) as Object
 end function
 
 
-' Read in the TV rating
-function GetTVRating(item as Object) as Object
-    ratings = item.ratings
+'*******************************************************************
+' Read the TV rating from an object containing the ratings metadata.
+' @param json - The object to parse.
+' @returns the ratings metadata.
+'*******************************************************************
+function GetTVRating(json as Object) as Object
+    ratings = json.ratings
     
     if ratings = invalid then return invalid
     
@@ -77,9 +110,16 @@ function GetTVRating(item as Object) as Object
 end function
 
 
-' Return parameterized metadata from the mediaMetaData object.
-function GetMediaMetaData(item as Object, property as String) as Object
-    mediaMetaData = item.mediaMetaData
+'**********************************************************************
+' Read the parameterized metadata from the mediaMetaData object.
+' @param json - The object to parse.
+' @param property - The propery to return.
+'                   (format, mediaId, phase, playbackUrls, productType,
+'                    runtimeMillis, state, type)
+' @returns the media metadata based on a parameterized property.
+'**********************************************************************
+function GetMediaMetaData(json as Object, property as String) as Object
+    mediaMetaData = json.mediaMetaData
 
     if mediaMetaData = invalid OR mediaMetaData[property] = invalid then return invalid
 
@@ -87,10 +127,16 @@ function GetMediaMetaData(item as Object, property as String) as Object
 end function
 
 
-' Return parameterized metadata from the releases object.
-function GetReleaseMetaData(item as Object, property as String) as Object
+'*********************************************************************
+' Read the parameterized metadata from the released object.
+' @param json - The object to parse.
+' @param property - The propery to return.
+'                   (releaseDate, releaseType, releaseYear, territory)
+' @returns the releases metadata based on a parameterized property.
+'*********************************************************************
+function GetReleaseMetaData(json as Object, property as String) as Object
 
-    releaseMetaData = item.releases
+    releaseMetaData = json.releases
 
     if releaseMetaData = invalid OR releaseMetaData[0] = invalid then return invalid
 
@@ -98,11 +144,15 @@ function GetReleaseMetaData(item as Object, property as String) as Object
 end function
 
 
-' Retrieve a dictionary of Reference ID's and Titles.
+'**********************************************************************
+' Construct a dictionary of Reference ID's and Titles.
+' @param json - The object to parse.
+' @returns a dictionary containing Reference ID's for the Curated Sets.
+'**********************************************************************
 function GetReferenceIds(json as Object) as Object
     refIds = {}
 
-    for each container in json.data.StandardCollection.containers
+    for each container in GetStandardCollectionContainers(json)
         if container <> invalid and container.set <> invalid and container.set.refId <> invalid
             ' Store the Reference ID as the key, and the Title as the value.
             refIds[container.set.refId] = container.set.text.title.full.set.default.content
@@ -113,7 +163,11 @@ function GetReferenceIds(json as Object) as Object
 end function
 
 
-' Retrieve a list of curated items based on a Reference ID.
+'****************************************************************
+' Construct an array of CuratedSet items based on a Reference ID.
+' @param refId - The Reference ID.
+' @return an array of CuratedSet items.
+'****************************************************************
 function GetCuratedItems(refId as Object) as Object
     items = []
     json = GetJSONResponse("https://cd-static.bamgrid.com/dp-117731241344/sets/%s.json".Format(refId))
