@@ -16,7 +16,7 @@
 
                 <Label
                     id="titleLabel"
-                    width="400"
+                    width="600"
                     wrap="true"
                     horizAlign="center"
                     font="font:MediumBoldSystemFont"
