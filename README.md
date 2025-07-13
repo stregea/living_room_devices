@@ -74,21 +74,17 @@ The following APIs allow for the population of rows and tile content dynamically
    ##### Method 2:
     - Within`.vscode/settings.json`, modify the following properties:
       - From 
-         ```json
-          {
-            ...
-            "host": "${promptForHost}",
-            "password": "${promptForPassword}",
-            ...
-          }
-          ```
+        ```json
+        {
+          "host": "${promptForHost}",
+          "password": "${promptForPassword}",
+        }
+        ```
         to
         ```json
         {
-        ...
-        "host": "<ROKU_DEVICE_IP>",
-        "password": "<your_password>",
-        ...
+          "host": "<ROKU_DEVICE_IP>",
+          "password": "<your_password>",
         }
         ```
       - Press `Cmd + Shift + D` (Mac) or `Ctrl + Shift + D` (Windows).
