@@ -17,6 +17,10 @@ sub Init()
     m.descriptionLabel = m.top.FindNode("descriptionLabel")
 
     m.poster.ObserveField("loadStatus", "OnLoadStatusChange")
+
+    ' Begin the fade in animation.
+    m.maskgroupanimation = m.top.findNode("MaskGroupAnimation")
+    m.maskgroupanimation.control = "start"
 end sub
 
 ' ********************************************************************
@@ -97,10 +101,17 @@ function OnKeyEvent(key as String, press as Boolean) as Boolean
         if key = "left"
             m.top.jumpToItem = leftItem
             result = true
+
+            ' Begin the fade in animation.
+            m.maskgroupanimation.control = "start"
+
         ' Navigate to the right item in case of "right" keypress.
         else if key = "right" 
             m.top.jumpToItem = rightItem
             result = true
+
+            ' Begin the fade in animation.
+            m.maskgroupanimation.control = "start"
         end if
     end if
     return result

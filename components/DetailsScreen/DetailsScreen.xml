@@ -14,13 +14,19 @@
             horizAlignment="center"
             itemSpacings="[10]">
 
-                <Label
-                    id="titleLabel"
-                    width="600"
-                    wrap="true"
-                    horizAlign="center"
-                    font="font:MediumBoldSystemFont"
-                />
+            <Label
+                id="titleLabel"
+                width="600"
+                wrap="true"
+                horizAlign="center"
+                font="font:MediumBoldSystemFont"
+            />
+
+            <!-- MaskGroup used to animate Tile with a fade in effect on render. -->
+            <!-- https://github.com/rokudev/samples/tree/master/ux%20components/control/MaskGroupExample -->
+            <MaskGroup
+                id = "maskGroup" 
+                maskuri = "pkg:/images/gradient_linear.png">
 
                 <Poster
                     id="poster"
@@ -30,14 +36,31 @@
                     loadHeight="281"
                     loadDisplayMode="scaleToFit"
                     />
+
+            </MaskGroup>
+
+            <Label
+                id="descriptionLabel"
+                width="500"
+                wrap="false"
+                horizAlign="center"
+                font="font:SmallBoldSystemFont"
+            />
             
-                <Label
-                    id="descriptionLabel"
-                    width="500"
-                    wrap="false"
-                    horizAlign="center"
-                    font="font:SmallBoldSystemFont"
-                />
+            <!-- Animation used for the fade-in effect on the MaskGroup. -->
+            <Animation 
+                id = "MaskGroupAnimation" 
+                duration = "1" 
+                easeFunction = "linear" 
+                repeat = "false" >
+
+                <Vector2DFieldInterpolator 
+                    id = "interpolator" 
+                    fieldToInterp = "maskGroup.maskOffset" 
+                    key = "[ 0.0, 0.5, 1.0 ]" 
+                    keyValue = "[ [-512,0], [512,0], [512,0] ]" />
+
+            </Animation>
         </LayoutGroup>
     </children>
     <script type="text/brightscript" uri="DetailsScreen.brs" />
