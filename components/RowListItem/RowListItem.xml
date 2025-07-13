@@ -2,13 +2,17 @@
 <component name="RowListItem" extends="Group" xsi:noNamespaceSchemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
     <interface>
         <field id="itemContent" type="node" onChange="OnContentSet" />
+        <field id="focusPercent" type="float" onChange="OnFocus"/>
+        <!-- Required for proper ZoomRowList scaling -->
         <field id="width" type="float" alias="poster.width" />
-        <field id="height" type="float" alias="poster.height" /> 
+        <field id="height" type="float" alias="poster.height" />
     </interface>
     <children>
         <!-- Poster Image -->
         <Poster
             id="poster"
+            translation = "[10, 10]"  
+            scaleRotateCenter = "[256.0, 144.0]"
         />
     </children>
     <script type="text/brightscript" uri="RowListItem.brs" />

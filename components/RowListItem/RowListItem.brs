@@ -13,6 +13,14 @@ sub Init()
 end sub
 
 
+' Scale the Poster on focus.
+' Reference: https://developer.roku.com/en-gb/docs/references/scenegraph/list-and-grid-nodes/overview.md#custom-focus-indicators
+sub OnFocus() 
+    scale = 1 + (m.top.focusPercent * 0.08) 
+    m.poster.scale = [scale, scale] 
+end sub
+
+
 ' Handler that is invoked when item metadata is retrieved.
 sub OnContentSet()
     content = m.top.itemContent

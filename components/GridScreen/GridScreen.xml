@@ -10,7 +10,7 @@
         <Label
 	        id="title"
 	        width="1020"
-			translation="[20,190]"
+			translation="[20, 190]"
             font="font:MediumBoldSystemFont"
 	    />
         <!-- ZoomRowList to be used for auto-scaling -->
@@ -18,8 +18,9 @@
         <ZoomRowList
             id="rowList"
             itemComponentName="RowListItem"
-            translation="[20,230]"
+            translation="[20, 230]"
             showRowCounter="[false]"
+            drawFocusFeedback="false"
         />
     </children>
     <script type="text/brightscript" uri="GridScreen.brs" />
