@@ -58,7 +58,7 @@ The following APIs allow for the population of rows and tile content dynamically
 ### Option 2: Using VS Code + BrightScript Extension
 
 1. #### Install the VS Code BrightScript Extension:
-    - [BrightScript VS Code Extension](https://marketplace.visualstudio.com/items?itemName=RokuDevelopers.BrightScript)
+    - [BrightScript VS Code Extension](https://marketplace.visualstudio.com/items?itemName=RokuCommunity.brightscript)
 
 2. #### Clone the repository
    ```
