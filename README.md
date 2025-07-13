@@ -90,6 +90,8 @@ The following APIs allow for the population of rows and tile content dynamically
       - Press `Cmd + Shift + D` (Mac) or `Ctrl + Shift + D` (Windows).
       - Press the green play button.
 
+---
+
 ## Extras
 
 - [Roku Developer Documentation](https://developer.roku.com/docs/developer-program/getting-started/roku-dev-prog.md)
