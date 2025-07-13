@@ -17,7 +17,7 @@ This is a Roku SceneGraph application developed as part of the Disney Living Roo
 
 ## Requirements
 - Roku device on the same network.
-- (Optional) [BrightScript VS Code extension](https://marketplace.visualstudio.com/items?itemName=RokuDevelopers.BrightScript)
+- (Optional) [BrightScript VS Code Extension](https://marketplace.visualstudio.com/items?itemName=RokuCommunity.brightscript)
 
 ## Data APIs
 The following APIs allow for the population of rows and tile content dynamically.
@@ -89,3 +89,8 @@ The following APIs allow for the population of rows and tile content dynamically
         ```
       - Press `Cmd + Shift + D` (Mac) or `Ctrl + Shift + D` (Windows).
       - Press the green play button.
+
+## Extras
+
+- [Roku Developer Documentation](https://developer.roku.com/docs/developer-program/getting-started/roku-dev-prog.md)
+- [Roku Reference Documentation](https://developer.roku.com/docs/references/references-overview.md)
