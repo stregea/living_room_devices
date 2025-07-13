@@ -94,26 +94,33 @@ end sub
 function OnKeyEvent(key as String, press as Boolean) as Boolean
     result = false
     if press
-        rowItemCount = m.top.content.GetChildCount()
-        leftItemIndex = m.top.itemFocused - 1
-        rightItemIndex = m.top.itemFocused + 1
+        firstItem = 0
+        lastItem = m.top.content.GetChildCount() - 1
+        
+        leftItem = m.top.itemFocused - 1
+        rightItem = m.top.itemFocused + 1
 
         ' Navigate to the left item in case of "left" keypress.
         if key = "left"
-            m.top.jumpToItem = leftItemIndex
+            m.top.jumpToItem = leftItem
             result = true
 
-            ' Begin the fade in animation, don't animate if at the beginning of the row.
-            if leftItemIndex <> - 1 then m.maskgroupanimation.control = "start"
+            ' If the left idex is out of bounds, set to the last item in the row.
+            if leftItem = -1 then m.top.jumpToItem = lastItem
+
+            ' Begin the fade in animation.
+            m.maskgroupanimation.control = "start"
 
         ' Navigate to the right item in case of "right" keypress.
         else if key = "right" 
-            m.top.jumpToItem = rightItemIndex
+            m.top.jumpToItem = rightItem
             result = true
 
-            ' Begin the fade in animation, don't animate if at the end of the row.
-            if rightItemIndex < rowItemCount then m.maskgroupanimation.control = "start"
+            ' If the right idex is out of bounds, set to the first item in the row.
+            if rightItem > lastItem then m.top.jumpToItem = firstItem
 
+            ' Begin the fade in animation.
+            m.maskgroupanimation.control = "start"
         end if
     end if
     return result
