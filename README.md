@@ -29,7 +29,7 @@ The following APIs allow for the population of rows and tile content dynamically
 
 ---
 
-## How to Side-load The App
+## How To Side-Load The App
 
 ### Option 1: Using Roku Web Developer Interface (Manual Method)
 
