@@ -12,7 +12,6 @@ sub ShowDetailsScreen(content as Object, selectedItem as Integer)
     detailsScreen.content = content
     detailsScreen.jumpToItem = selectedItem ' set index of item which should be focused
     detailsScreen.ObserveField("visible", "OnDetailsScreenVisibilityChanged")
-    detailsScreen.ObserveField("buttonSelected", "OnButtonSelected")
 
     AddScreenToView(detailsScreen)
 end sub
