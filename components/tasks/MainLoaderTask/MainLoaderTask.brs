@@ -33,7 +33,7 @@ sub GetContent()
         ' Parse and handle metadata from the response from https://cd-static.bamgrid.com/dp-117731241344/sets/<refId>.json
         rootChildren.Append(GetCuratedSetRows(json))
 
-        ' Set up a root ContentNode to represent rowList on the GridScreen.
+        ' Set up a root ContentNode to represent RowList on the GridScreen.
         rowListNode = CreateObject("roSGNode", "ContentNode")
         rowListNode.Update({
             children: rootChildren
@@ -47,7 +47,7 @@ end sub
 
 
 ' ***************************************************************
-' Construct a title for a RowListItem within the GridScreen.
+' Construct a title for a Tile within the GridScreen.
 ' @param item - The object containing the json metadata to parse.
 ' @returns a formated tile in the format: "Title | Rating".
 ' ***************************************************************
@@ -96,11 +96,11 @@ end function
 
 
 ' *********************************************************************************************************
-' Read in the data from the JSON response to pass to the RowListItem.
+' Read in the data from the JSON response to pass to the Tile.
 ' @param item - The object containing the json metadata to parse.
 ' @returns an object containing parsed data to display to the user within the GridScreen and DetailsScreen.
 ' *********************************************************************************************************
-function GetData(item as Object) as Object
+function GetTileData(item as Object) as Object
     data = {
         id : item.contentId,
         imageURI : GetImageURL(item, "tile", "1.78"),
@@ -115,10 +115,10 @@ end function
 
 
 ' *******************************************************************
-' Construct a row containing the metadata for RowListItem's.
+' Construct a row containing the metadata for Tile's.
 ' @param title - The title for the row.
 ' @param items - The items to place within the row of the GridScreen.
-' @returns a row containing a list of RowListItem metadata.
+' @returns a row containing a list of Tile metadata.
 ' *******************************************************************
 function ConstructRow(title as String, items as Object) as Object
     row = {}
@@ -128,8 +128,8 @@ function ConstructRow(title as String, items as Object) as Object
     if items <> invalid
         for each item in items
             if item <> invalid
-                data = GetData(item)
-                row.children.push(data)   
+                tile = GetTileData(item)
+                row.children.push(tile)   
             endif
         end for
     end if
@@ -141,7 +141,7 @@ end function
 ' *************************************************************************************
 ' Construct a list of RowItemData containing the data from a StandardCollection object.
 ' @param json - The json containing the StandardCollection metadata.
-' @returns a list of RowListItem's populated with data from the StandardCollection.
+' @returns a list of Tile's populated with data from the StandardCollection.
 ' *************************************************************************************
 function GetStandardCollectionRows(json as Object) as Object
     rows = []

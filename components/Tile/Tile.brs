@@ -1,12 +1,12 @@
-' **************************************************************************************************
-' * Filename: RowListItem.brs
-' * Description: This file serves as the main entry point and handler for the RowListItem component.  
+' *******************************************************************************************
+' * Filename: Tile.brs
+' * Description: This file serves as the main entry point and handler for the Tile component.  
 ' * Author: Samuel Tregea
-' **************************************************************************************************
+' *******************************************************************************************
 
-' *************************************
-' Initialize the RowListItem component.
-' *************************************
+' ******************************
+' Initialize the Tile component.
+' ******************************
 sub Init()
     m.poster = m.top.FindNode("poster")
 

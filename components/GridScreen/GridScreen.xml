@@ -17,7 +17,7 @@
         <!-- https://developer.roku.com/docs/references/scenegraph/list-and-grid-nodes/zoomrowlist.md -->
         <ZoomRowList
             id="rowList"
-            itemComponentName="RowListItem"
+            itemComponentName="Tile"
             translation="[20, 230]"
             showRowCounter="[false]"
             drawFocusFeedback="false"
