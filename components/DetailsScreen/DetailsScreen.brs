@@ -65,7 +65,7 @@ sub OnItemFocusedChanged(event as Object)
     SetDetailsContent(content)
 
     ' Don't display the video background if the URL isn't available.
-    if content.videoURL  = invalid
+    if content.videoURL = invalid
         m.video.visible = false
         m.video.control = "invalid"
     else
