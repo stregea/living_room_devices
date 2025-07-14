@@ -71,6 +71,7 @@ This app pulls dynamic content from the following endpoints:
    ```
 
 3. **Run the project**
+
    **Method A: Prompted Mode**
    - Press `Cmd + Shift + D` (Mac) or `Ctrl + Shift + D` (Windows).
    - Press the green ▶️ button.
