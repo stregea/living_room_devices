@@ -85,7 +85,7 @@ This app pulls dynamic content from the following endpoints:
           "password": "${promptForPassword}",
         }
         ```
-        to
+        To
         ```json
         {
           "host": "<ROKU_DEVICE_IP>",
