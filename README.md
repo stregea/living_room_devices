@@ -44,7 +44,7 @@ This app pulls dynamic content from the following endpoints:
      - You can also find it in: `Home → Settings → Network → About → IP address`
 
 2. #### Package the Project
-    - Option A: Download the included ZIP.
+    - Option A: [Download the included ZIP](https://github.com/stregea/living_room_devices/blob/main/living_room_devices.zip).
     - Option B: Clone and zip it yourself:
         ```
         git clone https://github.com/stregea/living_room_devices.git
