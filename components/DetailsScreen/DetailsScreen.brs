@@ -44,10 +44,11 @@ end function
 ' which is invoked when the user presses the "OK" button on a RowItem.
 ' ********************************************************************
 sub OnVisibilityChange()
-    ' set focus for buttons list when DetailsScreen become visible
     if m.top.visible = true
-        m.buttons.SetFocus(true)
         m.top.itemFocused = m.top.jumpToItem
+        m.video.control = "play"
+    else
+        m.video.control = "stop"
     end if
 end sub
 
@@ -66,6 +67,7 @@ sub OnItemFocusedChanged(event as Object)
     ' Don't display the video background if the URL isn't available.
     if content.videoURL  = invalid
         m.video.visible = false
+        m.video.control = "invalid"
     else
         m.video.visible = true
         m.video.control = "play"
@@ -124,12 +126,6 @@ function OnKeyEvent(key as String, press as Boolean) as Boolean
         
         leftItem = m.top.itemFocused - 1
         rightItem = m.top.itemFocused + 1
-
-        ' if m.video.content.url = invalid
-        '     m.video.visible = false' - set to false if url is null
-        ' else
-        '     m.video.visible = true
-        ' end if
 
         ' Navigate to the left item in case of "left" keypress.
         if key = "left"
