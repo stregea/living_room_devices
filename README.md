@@ -70,7 +70,7 @@ This app pulls dynamic content from the following endpoints:
    git clone https://github.com/stregea/living_room_devices.git
    ```
 
-3. #### Run the project
+3. **Run the project**
    **Method A: Prompted Mode**
    - Press `Cmd + Shift + D` (Mac) or `Ctrl + Shift + D` (Windows).
    - Press the green ▶️ button.
