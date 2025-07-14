@@ -37,13 +37,13 @@ This app pulls dynamic content from the following endpoints:
 
 ### Option 1: Using Roku Web Developer Interface (Manual Method)
 
-1. #### Enable Developer Mode
+1. **Enable Developer Mode**
    - Press the following sequence on your remote:
      `Home` x3 → `Up` x2 → `Right` → `Left` → `Right` → `Left` → `Right`
    - Note the IP address shown on screen.
      - You can also find it in: `Home → Settings → Network → About → IP address`
 
-2. #### Package the Project
+2. **Package the Project**
     - Option A: [Download the included ZIP](https://github.com/stregea/living_room_devices/blob/main/living_room_devices.zip).
     - Option B: Clone and zip it yourself:
         ```
@@ -51,7 +51,7 @@ This app pulls dynamic content from the following endpoints:
         ```
       Then zip the contents of the root directory.
 
-3. #### Side-load the App
+3. **Side-load the App**
    - Open a browser and go to: `http://<ROKU_DEVICE_IP>`.
    - Log in using:
      - **Username:** `rokudev`
@@ -62,21 +62,21 @@ This app pulls dynamic content from the following endpoints:
 
 ### Option 2: Visual Studio Code + BrightScript Extension
 
-1. #### Install the VS Code BrightScript Extension:
+1. **Install the VS Code BrightScript Extension**
     - [BrightScript VS Code Extension](https://marketplace.visualstudio.com/items?itemName=RokuCommunity.brightscript)
 
-2. #### Clone the repository
+2. **Clone the repository**
    ```
    git clone https://github.com/stregea/living_room_devices.git
    ```
 
 3. #### Run the project
-   ##### Method A: Prompted Mode 
+   **Method A: Prompted Mode**
    - Press `Cmd + Shift + D` (Mac) or `Ctrl + Shift + D` (Windows).
    - Press the green ▶️ button.
    - Enter your Roku IP and password when prompted.
 
-   ##### Method B: Configure Settings Manually
+   **Method B: Configure Settings Manually**
     - Within`.vscode/settings.json`, modify the following properties:
       - From 
         ```json
