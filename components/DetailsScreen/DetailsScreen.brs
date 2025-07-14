@@ -12,9 +12,9 @@ sub Init()
     m.top.ObserveField("itemFocused", "OnItemFocusedChanged")
 
     m.poster = m.top.FindNode("poster") 
-    
     m.titleLabel = m.top.FindNode("titleLabel")
     m.descriptionLabel = m.top.FindNode("descriptionLabel")
+    m.video = m.top.findNode("videoBackground")
 
     m.poster.ObserveField("loadStatus", "OnLoadStatusChange")
 
@@ -23,19 +23,18 @@ sub Init()
     m.maskgroupanimation.control = "start"
 
     ' Allow for a video background to display (if available).
-    setUpVideo()
+    setUpVideoBackground()
 end sub
 
 
 ' ***********************************************************************************
 ' Configure the Video component used as a background (if the video url is available).
 ' ***********************************************************************************
-function setUpVideo() as void
+function setUpVideoBackground() as void
   videoContent = createObject("RoSGNode", "ContentNode")
   videoContent.url = ""
   videoContent.streamformat = "mp4"
 
-  m.video = m.top.findNode("videoBackground")
   m.video.content = videoContent
 end function
 
