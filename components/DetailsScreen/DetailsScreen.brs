@@ -21,7 +21,24 @@ sub Init()
     ' Begin the fade in animation.
     m.maskgroupanimation = m.top.findNode("MaskGroupAnimation")
     m.maskgroupanimation.control = "start"
+
+    ' Allow for a video background to display (if available).
+    setUpVideo()
 end sub
+
+
+' ***********************************************************************************
+' Configure the Video component used as a background (if the video url is available).
+' ***********************************************************************************
+function setUpVideo() as void
+  videoContent = createObject("RoSGNode", "ContentNode")
+  videoContent.url = ""
+  videoContent.streamformat = "mp4"
+
+  m.video = m.top.findNode("videoBackground")
+  m.video.content = videoContent
+end function
+
 
 ' ********************************************************************
 ' Invoked when DetailsScreen "visible" field is changed,
@@ -46,6 +63,14 @@ sub OnItemFocusedChanged(event as Object)
 
     ' Populate DetailsScreen with item metadata.
     SetDetailsContent(content)
+
+    ' Don't display the video background if the URL isn't available.
+    if content.videoURL  = invalid
+        m.video.visible = false
+    else
+        m.video.visible = true
+        m.video.control = "play"
+    end if
 end sub
 
 
@@ -67,6 +92,7 @@ sub SetDetailsContent(content as Object)
     m.poster.uri = content.detailsImageURI
     m.titleLabel.text = content.detailsTitle
     m.descriptionLabel.text = content.description
+    m.video.content.url = content.videoURL 
 end sub
 
 
@@ -100,6 +126,12 @@ function OnKeyEvent(key as String, press as Boolean) as Boolean
         leftItem = m.top.itemFocused - 1
         rightItem = m.top.itemFocused + 1
 
+        ' if m.video.content.url = invalid
+        '     m.video.visible = false' - set to false if url is null
+        ' else
+        '     m.video.visible = true
+        ' end if
+
         ' Navigate to the left item in case of "left" keypress.
         if key = "left"
             m.top.jumpToItem = leftItem
@@ -122,6 +154,7 @@ function OnKeyEvent(key as String, press as Boolean) as Boolean
             ' Begin the fade in animation.
             m.maskgroupanimation.control = "start"
         end if
+
     end if
     return result
 end function

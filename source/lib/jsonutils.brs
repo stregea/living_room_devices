@@ -135,12 +135,29 @@ end function
 ' @returns the releases metadata based on a parameterized property.
 '*********************************************************************
 function GetReleaseMetaData(json as Object, property as String) as Object
-
     releaseMetaData = json.releases
 
     if releaseMetaData = invalid OR releaseMetaData[0] = invalid then return invalid
 
     return releaseMetaData[0][property]
+end function
+
+
+'*********************************************************************
+' Read the url property from the videoArt object metadata.
+' @param json - The object to parse.
+' @returns the video art playback url.
+'*********************************************************************
+function GetVideoArtURL(json as Object) as object
+    videoArt = json.videoArt
+
+    if videoArt = invalid OR videoArt[0] = invalid then return invalid
+
+    if videoArt[0].mediaMetaData = invalid OR videoArt[0].mediaMetaData.urls = invalid OR videoArt[0].mediaMetaData.urls[0] = invalid
+         return invalid
+    end if
+
+    return videoArt[0].mediaMetaData.urls[0].url
 end function
 
 

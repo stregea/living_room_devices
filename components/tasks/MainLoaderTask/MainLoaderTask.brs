@@ -107,7 +107,8 @@ function GetTileData(item as Object) as Object
         title : CreateTitle(item) ' This is the title displayed on the GridScreen.
         detailsTitle : GetTitle(item) ' This is the title displayed within the DetailsScreen.
         detailsImageURI : GetImageURL(item, "tile", "1.78"),
-        description : CreateDescription(item)
+        description : CreateDescription(item),
+        videoURL : GetVideoArtURL(item)
     }
     
     return data
