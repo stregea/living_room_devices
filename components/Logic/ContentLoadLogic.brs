@@ -37,7 +37,7 @@ end sub
 ' Reference: https://github.com/rokudev/samples/tree/master/ux%20components/widgets/BusySpinnerExample
 ' ****************************************************************************************************
 sub ShowLoadingIndicator()
-    if(m.loadingIndicator.poster.loadStatus = "ready")
+    if m.loadingIndicator.poster.loadStatus = "ready"
         centerX = (1280 - m.loadingIndicator.poster.bitmapWidth) / 2
         centerY = (720 - m.loadingIndicator.poster.bitmapHeight) / 2
 
