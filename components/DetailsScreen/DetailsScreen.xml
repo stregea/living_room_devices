@@ -22,7 +22,6 @@
                 horizAlignment="center"
                 itemSpacings="[10]">
 
-
                 <Label
                     id="titleLabel"
                     width="600"
