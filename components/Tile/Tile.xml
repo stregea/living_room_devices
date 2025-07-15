@@ -13,14 +13,13 @@
         <!-- https://github.com/rokudev/samples/tree/master/ux%20components/control/MaskGroupExample -->
         <MaskGroup
             id = "maskGroup" 
-            maskuri = "pkg:/images/gradient_linear.png">
+            maskuri = "pkg:/images/gradient_linear.png" >
             
             <!-- Poster Image -->
             <Poster
                 id="poster"
                 translation = "[10, 10]"  
-                scaleRotateCenter = "[256.0, 144.0]"
-            />
+                scaleRotateCenter = "[256.0, 144.0]" />
         </MaskGroup>
 
         <!-- Animation used for the fade-in effect -->

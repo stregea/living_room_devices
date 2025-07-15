@@ -11,8 +11,7 @@
             id="title"
             width="1020"
             translation="[20, 190]"
-            font="font:MediumBoldSystemFont"
-        />
+            font="font:MediumBoldSystemFont" />
         <!-- ZoomRowList to be used for auto-scaling -->
         <!-- https://developer.roku.com/docs/references/scenegraph/list-and-grid-nodes/zoomrowlist.md -->
         <ZoomRowList
@@ -20,8 +19,7 @@
             itemComponentName="Tile"
             translation="[20, 230]"
             showRowCounter="[false]"
-            drawFocusFeedback="false"
-        />
+            drawFocusFeedback="false" />
     </children>
     <script type="text/brightscript" uri="GridScreen.brs" />
 </component>

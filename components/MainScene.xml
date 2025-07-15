@@ -4,8 +4,7 @@
          <Overhang
             id="overhang"
             showClock="false"
-            logoUri="pkg:/images/overhang_logo.png"
-        />
+            logoUri="pkg:/images/overhang_logo.png" />
         <!-- LoadingIndicator should be visible only in case of waiting for content -->
         <!-- https://developer.roku.com/docs/references/scenegraph/widget-nodes/busyspinner.md -->
         <BusySpinner 

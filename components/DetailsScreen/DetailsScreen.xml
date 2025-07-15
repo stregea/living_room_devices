@@ -13,28 +13,27 @@
             width="1920" height="1080"
             translation="[0,0]"
             loop="true"
-            enableUI="false"/>
+            enableUI="false" />
             
         <Group>
             <LayoutGroup
                 translation="[650, 250]"
                 layoutDirection="vert"
                 horizAlignment="center"
-                itemSpacings="[10]">
+                itemSpacings="[10]" >
 
                 <Label
                     id="titleLabel"
                     width="600"
                     wrap="true"
                     horizAlign="center"
-                    font="font:MediumBoldSystemFont"
-                />
+                    font="font:MediumBoldSystemFont" />
 
                 <!-- MaskGroup used to animate Tile with a fade in effect on render. -->
                 <!-- https://github.com/rokudev/samples/tree/master/ux%20components/control/MaskGroupExample -->
                 <MaskGroup
                     id = "maskGroup" 
-                    maskuri = "pkg:/images/gradient_linear.png">
+                    maskuri = "pkg:/images/gradient_linear.png" >
 
                     <Poster
                         id="poster"
@@ -42,8 +41,7 @@
                         loadWidth="500"
                         height="281"
                         loadHeight="281"
-                        loadDisplayMode="scaleToFit"
-                        />
+                        loadDisplayMode="scaleToFit" />
                 </MaskGroup>
 
                 <Label
@@ -51,8 +49,7 @@
                     width="500"
                     wrap="false"
                     horizAlign="center"
-                    font="font:SmallBoldSystemFont"
-                />
+                    font="font:SmallBoldSystemFont" />
                 
                 <!-- Animation used for the fade-in effect on the MaskGroup. -->
                 <Animation 
