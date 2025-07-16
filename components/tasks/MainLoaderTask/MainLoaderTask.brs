@@ -49,7 +49,7 @@ end sub
 ' ***************************************************************
 ' Construct a title for a Tile within the GridScreen.
 ' @param item - The object containing the json metadata to parse.
-' @returns a formated tile in the format: "Title | Rating".
+' @returns a formated title in the format: "Title | Rating".
 ' ***************************************************************
 function CreateTitle(item as Object) as String
     title = GetTitle(item)
