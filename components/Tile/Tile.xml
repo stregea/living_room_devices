@@ -24,7 +24,7 @@
 
         <!-- Animation used for the fade-in effect -->
         <Animation 
-            id = "MaskGroupAnimation" 
+            id = "maskGroupAnimation" 
             duration = "3" 
             easeFunction = "linear" 
             repeat = "false" >

@@ -19,8 +19,8 @@ sub Init()
     m.poster.ObserveField("loadStatus", "OnLoadStatusChange")
 
     ' Begin the fade in animation.
-    m.maskgroupanimation = m.top.findNode("MaskGroupAnimation")
-    m.maskgroupanimation.control = "start"
+    m.maskGroupAnimation = m.top.findNode("maskGroupAnimation")
+    m.maskGroupAnimation.control = "start"
 
     ' Allow for a video background to display (if available).
     setUpVideoBackground()
@@ -136,7 +136,7 @@ function OnKeyEvent(key as String, press as Boolean) as Boolean
             if leftItem = -1 then m.top.jumpToItem = lastItem
 
             ' Begin the fade in animation.
-            m.maskgroupanimation.control = "start"
+            m.maskGroupAnimation.control = "start"
 
         ' Navigate to the right item in case of "right" keypress.
         else if key = "right" 
@@ -147,7 +147,7 @@ function OnKeyEvent(key as String, press as Boolean) as Boolean
             if rightItem > lastItem then m.top.jumpToItem = firstItem
 
             ' Begin the fade in animation.
-            m.maskgroupanimation.control = "start"
+            m.maskGroupAnimation.control = "start"
         end if
 
     end if

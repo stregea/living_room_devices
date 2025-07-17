@@ -53,7 +53,7 @@
                 
                 <!-- Animation used for the fade-in effect on the MaskGroup. -->
                 <Animation 
-                    id = "MaskGroupAnimation" 
+                    id = "maskGroupAnimation" 
                     duration = "1" 
                     easeFunction = "linear" 
                     repeat = "false" >

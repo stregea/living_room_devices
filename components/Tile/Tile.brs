@@ -14,8 +14,8 @@ sub Init()
     m.poster.ObserveField("loadStatus", "OnLoadStatusChange")
 
     ' Begin the fade in animation.
-    maskgroupanimation = m.top.findNode("MaskGroupAnimation")
-    maskgroupanimation.control = "start"
+    m.maskGroupAnimation = m.top.findNode("maskGroupAnimation")
+    m.maskGroupAnimation.control = "start"
 end sub
 
 
