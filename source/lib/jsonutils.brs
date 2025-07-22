@@ -166,15 +166,13 @@ end function
 ' @param json - The object to parse.
 ' @returns a dictionary containing Reference ID's for the Curated Sets.
 '**********************************************************************
-function GetReferenceIds(json as Object) as Object
+function GetReferenceIds(container as Object) as Object
     refIds = {}
 
-    for each container in GetStandardCollectionContainers(json)
-        if container <> invalid and container.set <> invalid and container.set.refId <> invalid
-            ' Store the Reference ID as the key, and the Title as the value.
-            refIds[container.set.refId] = container.set.text.title.full.set.default.content
-        end if
-    end for
+    if container <> invalid and container.set <> invalid and container.set.refId <> invalid
+        ' Store the Reference ID as the key, and the Title as the value.
+        refIds[container.set.refId] = container.set.text.title.full.set.default.content
+    end if
 
     return refIds
 end function

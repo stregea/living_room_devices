@@ -28,10 +28,7 @@ sub GetContent()
     if json <> invalid
 
         ' Parse and handle the metadata from the response from https://cd-static.bamgrid.com/dp-117731241344/home.json
-        rootChildren.Append(GetStandardCollectionRows(json))
-
-        ' Parse and handle metadata from the response from https://cd-static.bamgrid.com/dp-117731241344/sets/<refId>.json
-        rootChildren.Append(GetReferencedSetRows(json))
+        rootChildren.Append(GetRows(json))
 
         ' Set up a root ContentNode to represent RowList on the GridScreen.
         rowListNode = CreateObject("roSGNode", "ContentNode")
@@ -137,12 +134,14 @@ function ConstructRow(title as String, items as Object) as Object
 end function
 
 
-' *************************************************************************************
-' Construct a list of RowItemData containing the data from a StandardCollection object.
-' @param json - The json containing the StandardCollection metadata.
-' @returns a list of Tile's populated with data from the StandardCollection.
-' *************************************************************************************
-function GetStandardCollectionRows(json as Object) as Object
+' **********************************************************************************************
+' Construct a list of Rows containing the Tile data from both StandardCollection and
+' Referenced Set object collections.
+'
+' @param json - The json containing the Tile metadata.
+' @returns a list of Tile's populated with data from the StandardCollection and Referenced Sets.
+' **********************************************************************************************
+function GetRows(json as Object) as Object
     rows = []
 
     ' Read in the StandardCollection data.
@@ -154,8 +153,11 @@ function GetStandardCollectionRows(json as Object) as Object
             row = ConstructRow(GetShelfContainerTitle(container), GetStandardCollectionItems(container))
 
             ' Only add the row if there is data available.
-            if NOT row.children.IsEmpty() then rows.push(row)
-        end if
+            if NOT row.children.IsEmpty() then rows.Push(row)
+
+            ' Parse and handle metadata from the response from https://cd-static.bamgrid.com/dp-117731241344/sets/<refId>.json.
+            rows.Append(GetReferencedSetRows(container))
+        end if        
 
     end for
 
@@ -163,16 +165,16 @@ function GetStandardCollectionRows(json as Object) as Object
 end function
 
 
-' *********************************************************************************
-' Construct a list of RowItemData containing the data from a referenced set object.
-' @param json - The json containing the Referenced Set metadata.
+' ***********************************************************************************
+' Construct a list of Tile data containing the metadata from a referenced set object.
+' @param container - The json container containing the Referenced Set metadata.
 ' @returns a list of rows populated with data from the Referenced Sets.
-' *********************************************************************************
-function GetReferencedSetRows(json as Object) as Object
+' ***********************************************************************************
+function GetReferencedSetRows(container as Object) as Object
     rows = []
 
     ' Read in the Reference ID's data.
-    refIds = GetReferenceIds(json)
+    refIds = GetReferenceIds(container)
 
     ' Read in and parse the curated dataset.
     if refIds <> invalid
@@ -181,7 +183,7 @@ function GetReferencedSetRows(json as Object) as Object
                 row = ConstructRow(refIds[refId], GetReferencedItems(refId))
 
                 ' Only add the row if there is data available.
-                if NOT row.children.IsEmpty() then rows.push(row)
+                if NOT row.children.IsEmpty() then rows.Push(row)
             end if
         end for
     end if
