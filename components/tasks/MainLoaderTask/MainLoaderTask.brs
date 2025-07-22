@@ -31,13 +31,11 @@ sub GetContent()
         rootChildren.Append(GetStandardCollectionRows(json))
 
         ' Parse and handle metadata from the response from https://cd-static.bamgrid.com/dp-117731241344/sets/<refId>.json
-        rootChildren.Append(GetCuratedSetRows(json))
+        rootChildren.Append(GetReferencedSetRows(json))
 
         ' Set up a root ContentNode to represent RowList on the GridScreen.
         rowListNode = CreateObject("roSGNode", "ContentNode")
-        rowListNode.Update({
-            children: rootChildren
-        }, true)
+        rowListNode.Update({ children: rootChildren }, true)
 
         ' Populate content field with root content node.
         ' Observer(see OnMainContentLoaded in MainScene.brs) is invoked at that moment.
@@ -165,12 +163,12 @@ function GetStandardCollectionRows(json as Object) as Object
 end function
 
 
-' *****************************************************************************
-' Construct a list of RowItemData containing the data from a CuratedSet object.
-' @param json - The json containing the CuratedSet metadata.
-' @returns a list of rows populated with data from the CuratedSet.
-' *****************************************************************************
-function GetCuratedSetRows(json as Object) as Object
+' *********************************************************************************
+' Construct a list of RowItemData containing the data from a referenced set object.
+' @param json - The json containing the Referenced Set metadata.
+' @returns a list of rows populated with data from the Referenced Sets.
+' *********************************************************************************
+function GetReferencedSetRows(json as Object) as Object
     rows = []
 
     ' Read in the Reference ID's data.
@@ -180,7 +178,7 @@ function GetCuratedSetRows(json as Object) as Object
     if refIds <> invalid
         for each refId in refIds
             if refId <> invalid
-                row = ConstructRow(refIds[refId], GetCuratedItems(refId))
+                row = ConstructRow(refIds[refId], GetReferencedItems(refId))
 
                 ' Only add the row if there is data available.
                 if NOT row.children.IsEmpty() then rows.push(row)

@@ -180,21 +180,34 @@ function GetReferenceIds(json as Object) as Object
 end function
 
 
-'****************************************************************
-' Construct an array of CuratedSet items based on a Reference ID.
+'********************************************************************
+' Construct an array of Referenced Set items based on a Reference ID.
 ' @param refId - The Reference ID.
-' @return an array of CuratedSet items.
-'****************************************************************
-function GetCuratedItems(refId as Object) as Object
+' @return an array of Referenced Set items.
+'********************************************************************
+function GetReferencedItems(refId as Object) as Object
     items = []
+
     json = GetJSONResponse("https://cd-static.bamgrid.com/dp-117731241344/sets/%s.json".Format(refId))
     
-    if json <> invalid AND json.data <> invalid AND json.data.CuratedSet <> invalid AND json.data.CuratedSet.items <> invalid
-        for each item in json.data.CuratedSet.items
-            if item <> invalid
-                items.Push(item)
+    if json <> invalid AND json.data <> invalid
+        
+        ' Types of sets:
+        ' * BecauseYouSet
+        ' * CuratedSet
+        ' * TrendingSet
+        ' * PersonalizedCuratedSet
+        ' Using a loop to dynamically access the set type.
+        for each key in json.data
+            if json.data[key] <> invalid and json.data[key].items <> invalid
+                for each item in json.data[key].items
+                    if item <> invalid
+                        items.Push(item)
+                    end if
+                end for
             end if
         end for
+
     end if
 
     return items
